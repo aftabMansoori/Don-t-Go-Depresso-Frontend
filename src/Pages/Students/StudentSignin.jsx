@@ -1,54 +1,54 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { collegeLogin } from "../redux/action/collegeAction";
+import { studentLogin } from "../../redux/action/studentAction";
 
 import { TextField, Button } from "@mui/material";
 
-export default function CollegeSignin() {
+export default function StudentSignin() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [collegeCode, setCollegeCode] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!collegeCode || !password) {
+    if (!email || !password) {
       setMsg("Please fill the required fields");
     } else {
       try {
-        setLoading(true);
         setMsg("");
-        dispatch(collegeLogin(collegeCode, password))
+        setLoading(true);
+        dispatch(studentLogin(email, password))
           .then(() => {
-            history.push("/college/dashboard");
+            history.push("/student/set-profile");
           })
           .catch((err) => {
-            history.push("/college/signin");
-            setMsg("Input fields are invalid");
+            setMsg("Credentials are invalid");
           });
       } catch (err) {
         setMsg("There was an error while login");
       }
     }
     setLoading(false);
-    setMsg("");
   };
 
+  const signIn = useSelector((state) => state.student);
+
   return (
-    <div>
-      <h1>CollegeSginin</h1>
+    <>
+      <h1>Student Signin</h1>
       <h4>{msg}</h4>
       <div>
         <TextField
           id="outlined-basic"
-          label="College Code"
+          label="Email"
           margin="normal"
           variant="outlined"
-          onChange={(e) => setCollegeCode(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div>
@@ -68,6 +68,6 @@ export default function CollegeSignin() {
       >
         Sign In
       </Button>
-    </div>
+    </>
   );
 }
