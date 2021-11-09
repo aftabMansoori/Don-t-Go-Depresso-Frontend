@@ -19,9 +19,10 @@ export const collegeLogin = (collegeCode, password) => async (dispatch) => {
   await axios
     .post(collegeSignIn(), { collegeCode, password })
     .then((response) => {
-      console.log(response.data.status);
+      dispatch({ type: "LOGIN_SUCCESS" });
+      console.log(response);
     })
     .catch((err) => {
-      console.log(err);
+      dispatch({ type: "LOGIN_ERROR", payload: err });
     });
 };

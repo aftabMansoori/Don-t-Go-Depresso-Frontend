@@ -22,20 +22,20 @@ export default function CollegeSignin() {
       try {
         setLoading(true);
         setMsg("");
-        dispatch(collegeLogin(collegeCode, password));
-        //   .then(() => {
-        //     history.push("/");
-        //   })
-        //   .catch((e) => {
-        //     console.log(e);
-        //     setMsg("Input fields are invalid");
-        //   });
+        dispatch(collegeLogin(collegeCode, password))
+          .then(() => {
+            history.push("/college/dashboard");
+          })
+          .catch((err) => {
+            history.push("/college/signin");
+            setMsg("Input fields are invalid");
+          });
       } catch (err) {
-        console.log(err);
         setMsg("There was an error while login");
       }
-      setLoading(false);
     }
+    setLoading(false);
+    setMsg("");
   };
 
   return (
