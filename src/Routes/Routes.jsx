@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 //Components
+import Home from "../Pages/Home";
 //College
 import CollegeSignup from "../Pages/College/CollegeSignup";
 import CollegeSignin from "../Pages/College/CollegeSignin";
@@ -11,24 +12,32 @@ import StudentSignUp from "../Pages/Students/StudentSignUp";
 import StudentSignin from "../Pages/Students/StudentSignin";
 import StudentProfile from "../Pages/Students/StudentProfile";
 
+import PrivateRoutes from "./PrivateRoute";
+
 export default function Routes() {
   return (
     <>
       <Router>
         <Switch>
+          <Route exact path="/" component={Home} />
+
           {/* Student */}
           <Route exact path="/student/signup" component={StudentSignUp} />
           <Route exact path="/student/signin" component={StudentSignin} />
-          <Route exact path="/student/set-profile" component={StudentProfile} />
+          <PrivateRoutes
+            exact
+            path="/student/set-profile"
+            component={StudentProfile}
+          />
 
           {/* College Routes */}
           <Route exact path="/college/signup" component={CollegeSignup} />
-          <Route
+          <Route exact path="/college/signin" component={CollegeSignin} />
+          <PrivateRoutes
             exact
-            path={["/college/signin", "/"]}
-            component={CollegeSignin}
+            path="/college/dashboard"
+            component={CollegeDashboard}
           />
-          <Route exact path="/college/dashboard" component={CollegeDashboard} />
         </Switch>
       </Router>
     </>

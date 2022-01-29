@@ -29,3 +29,12 @@ export const studentLogin = (studentClgEmail, password) => async (dispatch) => {
   }
   return response.status;
 };
+
+export const studentLogout = () => async (dispatch) => {
+  dispatch({ type: "STUDENT_SIGNOUT_REQUEST" });
+  let response = axios.get(studentLogin());
+  if (response.status === 200) {
+    dispatch({ type: "STUDENT_SIGNOUT_SUCCESS" });
+    localStorage.removeItem("student");
+  } else dispatch({ type: "STUDENT_SIGNOUT_ERROR" });
+};

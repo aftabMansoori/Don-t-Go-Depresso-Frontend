@@ -28,6 +28,7 @@ export default function StudentSignin() {
           })
           .catch((err) => {
             setMsg("Credentials are invalid");
+            console.log(err);
           });
       } catch (err) {
         setMsg("There was an error while login");

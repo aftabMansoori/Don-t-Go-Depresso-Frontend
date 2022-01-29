@@ -20,27 +20,26 @@ export default function CollegeSignin() {
       setMsg("Please fill the required fields");
     } else {
       try {
-        setLoading(true);
         setMsg("");
+        setLoading(true);
         dispatch(collegeLogin(collegeCode, password))
           .then(() => {
             history.push("/college/dashboard");
           })
           .catch((err) => {
-            history.push("/college/signin");
-            setMsg("Input fields are invalid");
+            setMsg("Credentials are invalid");
+            console.log(err);
           });
       } catch (err) {
         setMsg("There was an error while login");
       }
     }
     setLoading(false);
-    setMsg("");
   };
 
   return (
     <div>
-      <h1>CollegeSginin</h1>
+      <h1>College Signin</h1>
       <h4>{msg}</h4>
       <div>
         <TextField

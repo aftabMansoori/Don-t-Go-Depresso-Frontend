@@ -4,8 +4,11 @@ const initState = {
   signUpError: null,
 
   isAuthenticated: false,
-  siginInProgress: false,
+  signinInProgress: false,
   signinError: null,
+
+  logoutInProgress: false,
+  logoutError: null,
 };
 
 const studentReducer = (state = initState, { type, payload }) => {
@@ -17,11 +20,17 @@ const studentReducer = (state = initState, { type, payload }) => {
     case "STUDENT_SIGNUP_ERROR":
       return { ...state, signUpInProgress: false, signUpError: payload };
     case "STUDENT_SIGNIN_REQUEST":
-      return { ...state, siginInProgress: true, signinError: null };
+      return { ...state, signinInProgress: true, signinError: null };
     case "STUDENT_SIGNIN_SUCCESS":
-      return { ...state, siginInProgress: false, isAuthenticated: true };
+      return { ...state, signinInProgress: false, isAuthenticated: true };
     case "STUDENT_SIGIN_ERROR":
       return { ...state, isAuthenticated: false, signinError: payload };
+    case "STUDENT_SIGNOUT_REQUEST":
+      return { ...state, logoutInProgress: true };
+    case "STUDENT_SIGNOUT_SUCCESS":
+      return { ...state, isAuthenticated: false, logoutInProgress: false };
+    case "STUDENT_SIGNOUT_ERROR":
+      return { ...state, isAuthenticated: false, logoutError: payload };
     default:
       return { ...state };
   }
