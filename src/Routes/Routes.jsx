@@ -14,6 +14,9 @@ import StudentProfile from "../Pages/Students/StudentProfile";
 
 import PrivateRoutes from "./PrivateRoute";
 
+//VideoCall
+import VideoCall from "../Pages/VideoCall/VideoCall";
+
 export default function Routes() {
   return (
     <>
@@ -33,11 +36,13 @@ export default function Routes() {
           {/* College Routes */}
           <Route exact path="/college/signup" component={CollegeSignup} />
           <Route exact path="/college/signin" component={CollegeSignin} />
-          <PrivateRoutes
+          {/* <PrivateRoutes
             exact
             path="/college/dashboard"
             component={CollegeDashboard}
-          />
+          /> */}
+          <Route exact path="/college/dashboard" component={CollegeDashboard} />
+          <Route exact path="/videocall" component={VideoCall} />
         </Switch>
       </Router>
     </>
