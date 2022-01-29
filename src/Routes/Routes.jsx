@@ -10,7 +10,8 @@ import CollegeDashboard from "../Pages/College/CollegeDashboard";
 import StudentSignUp from "../Pages/Students/StudentSignUp";
 import StudentSignin from "../Pages/Students/StudentSignin";
 import StudentProfile from "../Pages/Students/StudentProfile";
-
+//VideoCall
+import VideoCall from "../Pages/VideoCall/VideoCall";
 export default function Routes() {
   return (
     <>
@@ -29,6 +30,7 @@ export default function Routes() {
             component={CollegeSignin}
           />
           <Route exact path="/college/dashboard" component={CollegeDashboard} />
+          <Route exact path="/videocall" component={VideoCall} />
         </Switch>
       </Router>
     </>
