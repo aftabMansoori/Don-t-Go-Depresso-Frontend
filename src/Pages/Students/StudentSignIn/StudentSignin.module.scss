@@ -1,0 +1,25 @@
+.parent {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginForm {
+  width: 400px;
+
+  h1 {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    margin: 10px 0 20px 0;
+  }
+
+  div {
+    margin-bottom: 10px;
+  }
+}

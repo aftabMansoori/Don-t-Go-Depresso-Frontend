@@ -3,7 +3,7 @@ import {
   studentSignUp,
   studentProfile,
   studentSignOut,
-} from "../../api";
+} from "../../utils/api";
 import axios from "axios";
 
 export const studentRegister = (student) => async (dispatch) => {
