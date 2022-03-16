@@ -4,8 +4,7 @@ import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
-import { studentProfile } from "../../../utils/api";
-import axios from "axios";
+import { axiosConfig } from "../../../utils/axiosConfig";
 
 import {
   TextField,
@@ -29,6 +28,7 @@ export default function StudentProfile() {
     studentClass: "",
     studentPhoneNo: "",
     studentAge: "",
+    gender: "",
     aboutStudent: "",
   });
   const [loading, setLoading] = useState(false);
@@ -44,15 +44,16 @@ export default function StudentProfile() {
     try {
       setMsg("");
       setLoading(true);
-      // axios
-      //   .post(studentProfile(), { profile }, { withCredentials: true })
-      //   .then(() => {
-      //     history.push("/student/dashboard");
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //     setMsg(err + "There was an error");
-      //   });
+      axiosConfig
+        .post("/student/profile", { profile })
+        .then((res) => {
+          if (res.status !== 200) return;
+          history.push("/student/set-profile/2");
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log("ada", err.response);
+        });
     } catch (err) {
       console.log(err);
       setMsg("There was an error while updating your profile");

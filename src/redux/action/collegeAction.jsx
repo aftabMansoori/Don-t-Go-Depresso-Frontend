@@ -1,4 +1,4 @@
-import { collegeSignUp, collegeSignIn, collegeSignOut } from "../../api";
+import { collegeSignUp, collegeSignIn, collegeSignOut } from "../../utils/api";
 import axios from "axios";
 
 export const collegeRegister = (college) => async (dispatch) => {

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { studentLogin } from "../../../redux/action/studentAction";
-import axios from "axios";
+import { axiosConfig } from "../../../utils/axiosConfig";
 import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 import { TextField, Button } from "@mui/material";
 
@@ -16,23 +17,32 @@ export default function StudentSignin() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
-  const [msg, setMsg] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setLoading(true);
-    axios
-      .post("https://localhost:5000/student/signin", {
+    // `${base_url}/student/signin`
+    axiosConfig
+      .post("/student/signin", {
         username: email,
         password: password,
         role: "student",
       })
       .then((res) => {
-        console.log("ada", res);
-        toast("Sign in Sucessfull");
+        if (res.status !== 200) return;
+        // console.log("ada", res);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+        localStorage.setItem("isAuth", true);
+        toast.success("Sign in Sucessfull");
+        history.push("/student/dashboard");
+        window.location.reload(false);
+        setLoading(false);
       })
       .catch((err) => {
         console.log("ada", err.message);
+        toast.error(err.response.data.message);
+        setLoading(false);
       });
 
     setLoading(false);
@@ -59,6 +69,7 @@ export default function StudentSignin() {
           <div>
             <TextField
               id="outlined-basic"
+              type="password"
               label="Password"
               margin="normal"
               variant="outlined"
@@ -79,8 +90,14 @@ export default function StudentSignin() {
           >
             Sign In
           </Button>
-          <Toaster position="top-right" reverseOrder={false} />
+          <div className="text-center mt-4">
+            <p>
+              Don't have account?
+              <Link to="/student/signup"> Register here</Link>
+            </p>
+          </div>
         </div>
+        <Toaster position="top-right" reverseOrder={false} />
       </section>
     </>
   );

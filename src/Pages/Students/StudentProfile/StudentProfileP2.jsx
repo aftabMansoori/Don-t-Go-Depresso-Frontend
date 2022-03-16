@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import {
   TextField,
@@ -13,6 +14,8 @@ import {
 import styles from "./StudentProfile.module.scss";
 
 export default function StudentProfileP2() {
+  const history = useHistory();
+
   return (
     <>
       <section className={styles.parent}>
@@ -59,8 +62,6 @@ export default function StudentProfileP2() {
               margin="normal"
               variant="standard"
             />
-            {/* </div> */}
-            {/* </div> */}
             <div>
               <FormControl>
                 <FormLabel id="demo-row-radio-buttons-group-label">
@@ -92,7 +93,14 @@ export default function StudentProfileP2() {
                 Done
               </Button>
             </div>
-            <div>Skip</div>
+            <div>
+              <button
+                className="btn"
+                onClick={() => history.push("/student/dashboard")}
+              >
+                Skip
+              </button>
+            </div>
           </div>
         </div>
       </section>
