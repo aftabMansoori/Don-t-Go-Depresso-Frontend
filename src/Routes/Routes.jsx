@@ -35,13 +35,12 @@ export default function Routes() {
           {/* Student */}
           <Route exact path="/student/signup" component={StudentSignUp} />
           <Route exact path="/student/signin" component={StudentSignin} />
-          <Route exact path="/student/set-profile" component={StudentProfile} />
-          {/* <PrivateRoutes
+          <PrivateRoutes
             exact
             path="/student/set-profile"
             component={StudentProfile}
-          /> */}
-          <Route
+          />
+          <PrivateRoutes
             exact
             path="/student/set-profile/2"
             component={StudentProfileP2}
@@ -62,11 +61,10 @@ export default function Routes() {
           />
           <Route exact path="/college/add-emails" component={AddEmails} />
 
-          {/* <Route exact path={["/", "/blogs"]} component={Home} /> */}
-
           {/* <Route exact path="/college/dashboard" component={CollegeDashboard} /> */}
+          <Route exact path="/" component={Home} />
           <Route exact path="/quotes" component={Quotes} />
-          <Route exact path={["/blogs", "/"]} component={Blogs} />
+          <Route exact path="/blogs" component={Blogs} />
           <Route exact path="/videocall" component={VideoCall} />
         </Switch>
       </Router>

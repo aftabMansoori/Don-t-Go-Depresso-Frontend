@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import toast, { Toaster } from "react-hot-toast";
+
 // import { studentRegister } from "../../redux/action/studentAction";
 
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Dialog } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import styles from "./StudentSignUp.module.scss";
 
@@ -19,7 +22,7 @@ export default function StudentSignUp() {
     password: "",
     confPassword: "",
   });
-
+  const [open, setOpen] = useState(true);
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
 
@@ -57,9 +60,26 @@ export default function StudentSignUp() {
 
   const signUp = useSelector((state) => state.student);
 
+  const handleBack = () => {
+    setOpen(false);
+    history.push("/");
+  };
+
   return (
-    <>
+    <Dialog
+      open={open}
+      fullScreen={open}
+      maxWidth={"100vw"}
+      fullWidth={"100vw"}
+    >
       <section className={styles.parent}>
+        <div className="container my-5">
+          <ArrowBackIcon
+            fontSize="large"
+            className="btn p-0 m-0"
+            onClick={() => handleBack()}
+          />
+        </div>
         <div className={styles.signupForm}>
           <h1 className="text-center">Student Sign Up</h1>
           <div>
@@ -95,6 +115,7 @@ export default function StudentSignUp() {
               label="Password"
               fullWidth
               margin="normal"
+              type="password"
               variant="outlined"
             />
           </div>
@@ -106,6 +127,7 @@ export default function StudentSignUp() {
               }
               label="Confirm Password"
               fullWidth
+              type="password"
               margin="normal"
               variant="outlined"
             />
@@ -120,9 +142,12 @@ export default function StudentSignUp() {
           >
             Sign Up
           </Button>
+          <div className="text-center my-5">
+            Already have account? <Link to="/student/signin">Login</Link>
+          </div>
           <Toaster position="top-right" reverseOrder={false} />
         </div>
       </section>
-    </>
+    </Dialog>
   );
 }

@@ -6,7 +6,8 @@ import { axiosConfig } from "../../../utils/axiosConfig";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Dialog } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import styles from "./StudentSignin.module.scss";
 
@@ -17,6 +18,7 @@ export default function StudentSignin() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const handleSubmit = (e) => {
     // e.preventDefault();
@@ -50,8 +52,25 @@ export default function StudentSignin() {
 
   const signIn = useSelector((state) => state.student);
 
+  const handleBack = () => {
+    setOpen(false);
+    history.push("/");
+  };
+
   return (
-    <>
+    <Dialog
+      open={open}
+      fullScreen={open}
+      maxWidth={"100vw"}
+      fullWidth={"100vw"}
+    >
+      <div className="container my-5">
+        <ArrowBackIcon
+          fontSize="large"
+          className="btn p-0 m-0"
+          onClick={() => handleBack()}
+        />
+      </div>
       <section className={styles.parent}>
         <div className={styles.loginForm}>
           <h1 className="text-center">Sign in</h1>
@@ -99,6 +118,6 @@ export default function StudentSignin() {
         </div>
         <Toaster position="top-right" reverseOrder={false} />
       </section>
-    </>
+    </Dialog>
   );
 }

@@ -73,6 +73,9 @@ export default function Navbar({ isAuth }) {
           id="navbarNavAltMarkup"
         >
           <div className="navbar-nav">
+            <Link className="nav-item nav-link mx-2" to="/">
+              Home
+            </Link>
             <Link className="nav-item nav-link mx-2" to="/blogs">
               Blogs
             </Link>

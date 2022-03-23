@@ -1,23 +1,28 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-// import { collegeLogin } from "../../redux/action/collegeAction";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Dialog } from "@mui/material";
 
 import styles from "./CollegeSignin.module.scss";
 
 export default function CollegeSignin() {
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const [collegeCode, setCollegeCode] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
-  const [msg, setMsg] = useState("");
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();

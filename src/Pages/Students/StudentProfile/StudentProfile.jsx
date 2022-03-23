@@ -14,6 +14,7 @@ import {
   FormControlLabel,
   FormControl,
   FormLabel,
+  Dialog,
 } from "@mui/material";
 
 import styles from "./StudentProfile.module.scss";
@@ -22,6 +23,7 @@ export default function StudentProfile() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const [open, setOpen] = useState(true);
   const [profile, setProfile] = useState({
     studentName: "",
     studentPRN: "",
@@ -61,8 +63,18 @@ export default function StudentProfile() {
     setLoading(false);
   };
 
+  const handleBack = () => {
+    setOpen(false);
+    history.push("/");
+  };
+
   return (
-    <>
+    <Dialog
+      open={open}
+      fullScreen={open}
+      maxWidth={"100vw"}
+      fullWidth={"100vw"}
+    >
       <section className={styles.parent}>
         <div className={styles.profileForm + " container"}>
           <h1 className="text-center">Student Profile</h1>
@@ -192,6 +204,6 @@ export default function StudentProfile() {
           </Button>
         </div>
       </section>
-    </>
+    </Dialog>
   );
 }

@@ -1,9 +1,14 @@
 import React from "react";
 
+//Components
+import Appointments from "../../../Components/Student/Appointments/Appointments";
+
 export default function StudentDashboard() {
   return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
+    <>
+      <div className="container">
+        <Appointments />
+      </div>
+    </>
   );
 }
