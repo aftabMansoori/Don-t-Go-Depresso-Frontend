@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 // import { collegeRegister } from "../../../redux/action/collegeAction";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import toast, { Toaster } from "react-hot-toast";
 
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Dialog } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import styles from "./CollegeSignup.module.scss";
 
@@ -23,6 +25,7 @@ export default function CollegeSignup() {
     collegeLocation: "",
   });
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,107 +45,132 @@ export default function CollegeSignup() {
       });
   };
 
+  const handleBack = () => {
+    setOpen(false);
+    history.push("/");
+  };
+
   return (
-    <div className={styles.parent}>
-      <h1 className="mb-5">CollegeSignup</h1>
-      <div className={styles.signupForm}>
-        <div>
-          <TextField
-            id="outlined-basic"
-            onChange={(e) =>
-              setCollege({ ...college, collegeName: e.target.value })
-            }
-            fullWidth
-            label="College Name"
-            margin="normal"
-            variant="outlined"
+    <Dialog
+      open={open}
+      fullScreen={open}
+      maxWidth={"100vw"}
+      fullWidth={"100vw"}
+    >
+      <div className={styles.parent}>
+        <div className="container my-5">
+          <ArrowBackIcon
+            fontSize="large"
+            className="btn p-0 m-0"
+            onClick={() => handleBack()}
           />
         </div>
-        <div>
-          <TextField
-            id="outlined-basic"
-            onChange={(e) =>
-              setCollege({ ...college, collegeCode: e.target.value })
-            }
-            label="College Code"
+        <h1 className="mb-5">CollegeSignup</h1>
+        <div className={styles.signupForm}>
+          <div>
+            <TextField
+              id="outlined-basic"
+              onChange={(e) =>
+                setCollege({ ...college, collegeName: e.target.value })
+              }
+              fullWidth
+              label="College Name"
+              margin="normal"
+              variant="outlined"
+            />
+          </div>
+          <div>
+            <TextField
+              id="outlined-basic"
+              onChange={(e) =>
+                setCollege({ ...college, collegeCode: e.target.value })
+              }
+              label="College Code"
+              fullWidth
+              margin="normal"
+              variant="outlined"
+            />
+          </div>
+          <div>
+            <TextField
+              id="outlined-basic"
+              onChange={(e) =>
+                setCollege({ ...college, collegePhoneNo: e.target.value })
+              }
+              label="Phone Number"
+              fullWidth
+              margin="normal"
+              variant="outlined"
+            />
+          </div>
+          <div>
+            <TextField
+              id="outlined-basic"
+              onChange={(e) =>
+                setCollege({ ...college, password: e.target.value })
+              }
+              label="Password"
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              type="password"
+            />
+          </div>
+          <div>
+            <TextField
+              id="outlined-basic"
+              onChange={(e) =>
+                setCollege({ ...college, confPassword: e.target.value })
+              }
+              label="Confirm Password"
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              type="password"
+            />
+          </div>
+          <div>
+            <TextField
+              id="outlined-basic"
+              onChange={(e) =>
+                setCollege({ ...college, collegeAddress: e.target.value })
+              }
+              fullWidth
+              label="College Address"
+              margin="normal"
+              variant="outlined"
+            />
+          </div>
+          <div>
+            <TextField
+              id="outlined-basic"
+              onChange={(e) =>
+                setCollege({ ...college, collegeLocation: e.target.value })
+              }
+              fullWidth
+              label="College Location"
+              margin="normal"
+              variant="outlined"
+            />
+          </div>
+          <Button
+            disabled={loading}
+            variant="contained"
             fullWidth
-            margin="normal"
-            variant="outlined"
-          />
+            type="submit"
+            onClick={handleSubmit}
+          >
+            Sign Up
+          </Button>
         </div>
-        <div>
-          <TextField
-            id="outlined-basic"
-            onChange={(e) =>
-              setCollege({ ...college, collegePhoneNo: e.target.value })
-            }
-            label="Phone Number"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-          />
+        <div className="text-center mt-4">
+          <p>
+            Already have an account?
+            <Link to="/college/signin"> Login here</Link>
+          </p>
         </div>
-        <div>
-          <TextField
-            id="outlined-basic"
-            onChange={(e) =>
-              setCollege({ ...college, password: e.target.value })
-            }
-            label="Password"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            type="password"
-          />
-        </div>
-        <div>
-          <TextField
-            id="outlined-basic"
-            onChange={(e) =>
-              setCollege({ ...college, confPassword: e.target.value })
-            }
-            label="Confirm Password"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            type="password"
-          />
-        </div>
-        <div>
-          <TextField
-            id="outlined-basic"
-            onChange={(e) =>
-              setCollege({ ...college, collegeAddress: e.target.value })
-            }
-            fullWidth
-            label="College Address"
-            margin="normal"
-            variant="outlined"
-          />
-        </div>
-        <div>
-          <TextField
-            id="outlined-basic"
-            onChange={(e) =>
-              setCollege({ ...college, collegeLocation: e.target.value })
-            }
-            fullWidth
-            label="College Location"
-            margin="normal"
-            variant="outlined"
-          />
-        </div>
-        <Button
-          disabled={loading}
-          variant="contained"
-          fullWidth
-          type="submit"
-          onClick={handleSubmit}
-        >
-          Sign Up
-        </Button>
+        <Toaster position="top-right" />
       </div>
-      <Toaster position="top-right" />
-    </div>
+    </Dialog>
   );
 }

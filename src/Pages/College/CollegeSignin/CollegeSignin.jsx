@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 import { TextField, Button, Dialog } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import styles from "./CollegeSignin.module.scss";
 
@@ -14,15 +15,7 @@ export default function CollegeSignin() {
   const [collegeCode, setCollegeCode] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const [open, setOpen] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,51 +51,70 @@ export default function CollegeSignin() {
     setLoading(false);
   };
 
+  const handleBack = () => {
+    setOpen(false);
+    history.push("/");
+  };
+
   return (
-    <div className={styles.parent}>
-      <div className={styles.signinForm}>
-        <h1>College Signin</h1>
-        <div>
-          <TextField
-            id="outlined-basic"
-            fullWidth
-            label="College Code"
-            margin="normal"
-            variant="outlined"
-            onChange={(e) => setCollegeCode(e.target.value)}
+    <Dialog
+      open={open}
+      fullScreen={open}
+      maxWidth={"100vw"}
+      fullWidth={"100vw"}
+    >
+      <div className={styles.parent}>
+        <div className="container my-5">
+          <ArrowBackIcon
+            fontSize="large"
+            className="btn p-0 m-0"
+            onClick={() => handleBack()}
           />
         </div>
-        <div>
-          <TextField
-            id="outlined-basic"
-            label="Password"
-            margin="normal"
-            variant="outlined"
+        <div className={styles.signinForm}>
+          <h1>College Signin</h1>
+          <div>
+            <TextField
+              id="outlined-basic"
+              fullWidth
+              label="College Code"
+              margin="normal"
+              variant="outlined"
+              onChange={(e) => setCollegeCode(e.target.value)}
+            />
+          </div>
+          <div>
+            <TextField
+              id="outlined-basic"
+              label="Password"
+              margin="normal"
+              variant="outlined"
+              fullWidth
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+            />
+          </div>
+          <div className="text-end">
+            <p>Forget Password?</p>
+          </div>
+          <Button
+            disabled={loading}
+            onClick={handleSubmit}
             fullWidth
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-          />
+            variant="contained"
+            type="submit"
+          >
+            Sign In
+          </Button>
         </div>
-        <div className="text-end">
-          <p>Forget Password?</p>
+        <div className="text-center mt-4">
+          <p>
+            Don't have account?
+            <Link to="/college/signup"> Register here</Link>
+          </p>
         </div>
-        <Button
-          disabled={loading}
-          onClick={handleSubmit}
-          fullWidth
-          variant="contained"
-          type="submit"
-        >
-          Sign In
-        </Button>
+        <Toaster position="top-right" />
       </div>
-      <div className="text-center mt-4">
-        <p>
-          Don't have account?
-          <Link to="/college/signup"> Register here</Link>
-        </p>
-      </div>
-      <Toaster position="top-right" />
-    </div>
+    </Dialog>
   );
 }
