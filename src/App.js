@@ -1,5 +1,6 @@
 import Routes from "./Routes/Routes.jsx";
-import styles from "./App.module.scss";
+
+import "./App.scss";
 
 function App() {
   return (

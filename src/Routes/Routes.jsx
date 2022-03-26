@@ -17,6 +17,9 @@ import StudentSignin from "../Pages/Students/StudentSignIn/StudentSignin";
 import StudentProfile from "../Pages/Students/StudentProfile/StudentProfile";
 import StudentProfileP2 from "../Pages/Students/StudentProfile/StudentProfileP2";
 import StudentDashboard from "../Pages/Students/Dashboard/StudentDashboard";
+//Counsellor
+import CSSignin from "../Pages/Counsellor/CSSignin/CSSignin";
+import CSDashboard from "../Pages/Counsellor/CSSchedules/CSDashboard";
 
 import PrivateRoutes from "./PrivateRoute";
 
@@ -60,6 +63,10 @@ export default function Routes() {
             component={CollegeDashboard}
           />
           <Route exact path="/college/add-emails" component={AddEmails} />
+
+          {/* Counsellor */}
+          <Route exact path="/counsellor/signin" component={CSSignin} />
+          <Route exact path="/counsellor/dashboard" component={CSDashboard} />
 
           {/* <Route exact path="/college/dashboard" component={CollegeDashboard} /> */}
           <Route exact path="/" component={Home} />

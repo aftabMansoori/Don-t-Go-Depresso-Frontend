@@ -22,7 +22,6 @@ const rows = [
   createData("26 March, 2022", "Counsellor Name", "waiting"),
   createData("24 March, 2022", "Counsellor Name", "rejected"),
   createData("21 March, 2022", "Counsellor Name", "accepted"),
-  createData("20 March, 2022", "Counsellor Name", "waiting"),
   createData("14 March, 2022", "Counsellor Name", "rejected"),
   createData("12 March, 2022", "Counsellor Name", "accepted"),
 ];
@@ -30,12 +29,6 @@ const rows = [
 export default function Appointments() {
   return (
     <>
-      <div className="my-5 d-flex justify-content-between">
-        <h3>Appointments</h3>
-        <div>
-          <button className="btn btn-success">Schedule</button>
-        </div>
-      </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -62,7 +55,7 @@ export default function Appointments() {
                   {row.status === "rejected" ? (
                     <div className="text-danger">
                       <CloseIcon />
-                      <span className="mx-3 text-danger">Rejected</span>
+                      <span className="mx-3 text-danger">Rescheduled</span>
                     </div>
                   ) : row.status === "accepted" ? (
                     <div className="text-success">
