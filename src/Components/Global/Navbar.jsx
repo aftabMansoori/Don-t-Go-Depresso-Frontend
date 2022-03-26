@@ -124,6 +124,13 @@ export default function Navbar({ isAuth }) {
                 }}
               >
                 <Typography sx={{ px: 2 }}>
+                  <div className="btn">
+                    <Link className="text-dark" to="/student/dashboard">
+                      Dashboard
+                    </Link>
+                  </div>
+                </Typography>
+                <Typography sx={{ px: 2 }}>
                   <div className="btn">Profile</div>
                 </Typography>
                 <Typography sx={{ px: 2 }}>
