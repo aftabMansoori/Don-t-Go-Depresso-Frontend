@@ -9,8 +9,24 @@ html {
   }
 }
 
+body {
+  font-family: "Ubuntu", sans-serif;
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Proza Libre", sans-serif;
+    font-weight: 600;
+  }
+}
+
 .MuiFormLabel-root {
   background-color: white;
   // margin-top: -5px;
   padding: 0 10px !important;
 }
+
+// Fonts
+// font-family: 'Patrick Hand', cursive;
+// font-family: 'Proza Libre', sans-serif; - heading
+// font-family: 'Ubuntu', sans-serif;
