@@ -17,6 +17,7 @@ import StudentSignin from "../Pages/Students/StudentSignIn/StudentSignin";
 import StudentProfile from "../Pages/Students/StudentProfile/StudentProfile";
 import StudentProfileP2 from "../Pages/Students/StudentProfile/StudentProfileP2";
 import StudentDashboard from "../Pages/Students/Dashboard/StudentDashboard";
+import ViewProfile from "../Pages/Students/StudentProfile/ViewProfile";
 //Counsellor
 import CSSignin from "../Pages/Counsellor/CSSignin/CSSignin";
 import CSDashboard from "../Pages/Counsellor/CSSchedules/CSDashboard";
@@ -28,7 +29,7 @@ import VideoCall from "../Pages/VideoCall/VideoCall";
 
 export default function Routes() {
   const isAuth = JSON.parse(localStorage.getItem("token"));
-  // console.log("ada", isAuth);
+
   return (
     <>
       <Router>
@@ -53,6 +54,7 @@ export default function Routes() {
             path="/student/dashboard"
             component={StudentDashboard}
           />
+          <Route exact path="/student/view-profile" component={ViewProfile} />
 
           {/* College Routes */}
           <Route exact path="/college/signup" component={CollegeSignup} />
