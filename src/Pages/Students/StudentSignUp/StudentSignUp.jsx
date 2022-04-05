@@ -72,82 +72,99 @@ export default function StudentSignUp() {
       maxWidth={"100vw"}
       fullWidth={"100vw"}
     >
-      <section className={styles.parent}>
-        <div className="container my-5">
-          <ArrowBackIcon
-            fontSize="large"
-            className="btn p-0 m-0"
-            onClick={() => handleBack()}
-          />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-6">
+            <section className={styles.parent}>
+              <div className="container my-5">
+                <ArrowBackIcon
+                  fontSize="large"
+                  className="btn p-0 m-0"
+                  onClick={() => handleBack()}
+                />
+              </div>
+              <div className={styles.signupForm}>
+                <h1 className="text-center">Sign Up</h1>
+                <div>
+                  <TextField
+                    id="outlined-basic"
+                    onChange={(e) =>
+                      setStudent({
+                        ...student,
+                        studentClgEmail: e.target.value,
+                      })
+                    }
+                    label="Email"
+                    margin="normal"
+                    fullWidth
+                    variant="outlined"
+                  />
+                </div>
+                <div>
+                  <TextField
+                    id="outlined-basic"
+                    onChange={(e) =>
+                      setStudent({ ...student, studentClgCode: e.target.value })
+                    }
+                    label="Code"
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </div>
+                <div>
+                  <TextField
+                    id="outlined-basic"
+                    onChange={(e) =>
+                      setStudent({ ...student, password: e.target.value })
+                    }
+                    label="Password"
+                    fullWidth
+                    margin="normal"
+                    type="password"
+                    variant="outlined"
+                  />
+                </div>
+                <div>
+                  <TextField
+                    id="outlined-basic"
+                    onChange={(e) =>
+                      setStudent({ ...student, confPassword: e.target.value })
+                    }
+                    label="Confirm Password"
+                    fullWidth
+                    type="password"
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </div>
+                <Button
+                  disabled={loading}
+                  variant="contained"
+                  fullWidth
+                  type="submit"
+                  size="large"
+                  onClick={handleSubmit}
+                >
+                  Sign Up
+                </Button>
+                <div className="text-center my-5">
+                  Already have account? <Link to="/student/signin">Signin</Link>
+                </div>
+                <Toaster position="top-right" reverseOrder={false} />
+              </div>
+            </section>
+          </div>
+          <div className="col-6">
+            <div
+              className="d-flex align-items-center justify-content-center"
+              style={{ height: "100vh" }}
+            >
+              <img className="img-fluid" src="/Images/signupGif.gif" alt="" />
+            </div>
+          </div>
         </div>
-        <div className={styles.signupForm}>
-          <h1 className="text-center">Student Sign Up</h1>
-          <div>
-            <TextField
-              id="outlined-basic"
-              onChange={(e) =>
-                setStudent({ ...student, studentClgEmail: e.target.value })
-              }
-              label="Email"
-              margin="normal"
-              fullWidth
-              variant="outlined"
-            />
-          </div>
-          <div>
-            <TextField
-              id="outlined-basic"
-              onChange={(e) =>
-                setStudent({ ...student, studentClgCode: e.target.value })
-              }
-              label="Code"
-              fullWidth
-              margin="normal"
-              variant="outlined"
-            />
-          </div>
-          <div>
-            <TextField
-              id="outlined-basic"
-              onChange={(e) =>
-                setStudent({ ...student, password: e.target.value })
-              }
-              label="Password"
-              fullWidth
-              margin="normal"
-              type="password"
-              variant="outlined"
-            />
-          </div>
-          <div>
-            <TextField
-              id="outlined-basic"
-              onChange={(e) =>
-                setStudent({ ...student, confPassword: e.target.value })
-              }
-              label="Confirm Password"
-              fullWidth
-              type="password"
-              margin="normal"
-              variant="outlined"
-            />
-          </div>
-          <Button
-            disabled={loading}
-            variant="contained"
-            fullWidth
-            type="submit"
-            size="large"
-            onClick={handleSubmit}
-          >
-            Sign Up
-          </Button>
-          <div className="text-center my-5">
-            Already have account? <Link to="/student/signin">Login</Link>
-          </div>
-          <Toaster position="top-right" reverseOrder={false} />
-        </div>
-      </section>
+      </div>
     </Dialog>
   );
 }

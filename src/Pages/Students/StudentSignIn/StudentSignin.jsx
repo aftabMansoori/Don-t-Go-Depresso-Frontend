@@ -64,60 +64,75 @@ export default function StudentSignin() {
       maxWidth={"100vw"}
       fullWidth={"100vw"}
     >
-      <div className="container my-5">
-        <ArrowBackIcon
-          fontSize="large"
-          className="btn p-0 m-0"
-          onClick={() => handleBack()}
-        />
-      </div>
-      <section className={styles.parent}>
-        <div className={styles.loginForm}>
-          <h1 className="text-center">Sign in</h1>
-          <p className="text-center">Sign in to safe mental space!</p>
-          <div>
-            <TextField
-              id="outlined-basic"
-              label="Email"
-              margin="normal"
-              variant="outlined"
-              fullWidth
-              onChange={(e) => setEmail(e.target.value)}
-            />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-6">
+            <div className="container my-5">
+              <ArrowBackIcon
+                fontSize="large"
+                className="btn p-0 m-0"
+                onClick={() => handleBack()}
+              />
+            </div>
+            <section className={styles.parent}>
+              <div className={styles.loginForm}>
+                <h1 className="text-center">Sign in</h1>
+                <p className="text-center">Sign in to safe mental space!</p>
+                <div>
+                  <TextField
+                    id="outlined-basic"
+                    label="Email"
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <TextField
+                    id="outlined-basic"
+                    type="password"
+                    label="Password"
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <div className="text-end">
+                  <p>Forget Password?</p>
+                </div>
+                <Button
+                  disabled={loading}
+                  onClick={handleSubmit}
+                  fullWidth
+                  variant="contained"
+                  type="submit"
+                  size="large"
+                >
+                  Sign In
+                </Button>
+                <div className="text-center mt-4">
+                  <p>
+                    Don't have account?
+                    <Link to="/student/signup"> Register here</Link>
+                  </p>
+                </div>
+              </div>
+
+              <Toaster position="top-right" reverseOrder={false} />
+            </section>
           </div>
-          <div>
-            <TextField
-              id="outlined-basic"
-              type="password"
-              label="Password"
-              margin="normal"
-              variant="outlined"
-              fullWidth
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className="text-end">
-            <p>Forget Password?</p>
-          </div>
-          <Button
-            disabled={loading}
-            onClick={handleSubmit}
-            fullWidth
-            variant="contained"
-            type="submit"
-            size="large"
-          >
-            Sign In
-          </Button>
-          <div className="text-center mt-4">
-            <p>
-              Don't have account?
-              <Link to="/student/signup"> Register here</Link>
-            </p>
+          <div className="col-6">
+            <div
+              className="d-flex align-items-center justify-content-center"
+              style={{ height: "100vh", background: "#fef5d9" }}
+            >
+              <img className="img-fluid" src="/Images/signinGif.gif" alt="" />
+            </div>
           </div>
         </div>
-        <Toaster position="top-right" reverseOrder={false} />
-      </section>
+      </div>
     </Dialog>
   );
 }
