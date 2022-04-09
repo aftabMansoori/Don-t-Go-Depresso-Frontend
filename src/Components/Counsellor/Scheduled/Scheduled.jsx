@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 //MUI
 import { styled } from "@mui/material/styles";
@@ -8,6 +8,18 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
+  TextField,
+} from "@mui/material";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DateTimePicker from "@mui/lab/DateTimePicker";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,6 +52,12 @@ const rows = [
 ];
 
 export default function Scheduled() {
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
   return (
     <>
       <TableContainer>
@@ -64,7 +82,11 @@ export default function Scheduled() {
                   <button type="button" class="btn btn-primary mx-2">
                     Start
                   </button>
-                  <button type="button" class="btn btn-outline-primary mx-2">
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary mx-2"
+                    onClick={handleClick}
+                  >
                     Reschedule
                   </button>
                 </StyledTableCell>
@@ -73,6 +95,33 @@ export default function Scheduled() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Dialog
+        open={open}
+        onClose={handleClick}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Select the schedule"}
+        </DialogTitle>
+        <div className="d-flex align-items-center justify-content-center mx-3">
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DateTimePicker
+              renderInput={(params) => <TextField {...params} />}
+              // value={value}
+              // onChange={(newValue) => {
+              //   setValue(newValue);
+              // }}
+            />
+          </LocalizationProvider>
+        </div>
+        <DialogActions>
+          <Button onClick={handleClick}>Cancel</Button>
+          <Button onClick={handleClick} autoFocus>
+            Okay
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }

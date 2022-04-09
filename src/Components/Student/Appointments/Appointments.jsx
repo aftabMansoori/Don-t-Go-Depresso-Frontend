@@ -6,11 +6,11 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
 import styles from "./Appointments.module.scss";
 
@@ -29,7 +29,7 @@ const rows = [
 export default function Appointments() {
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -53,9 +53,9 @@ export default function Appointments() {
                 <TableCell>{row.counsellor}</TableCell>
                 <TableCell>
                   {row.status === "rejected" ? (
-                    <div className="text-danger">
-                      <CloseIcon />
-                      <span className="mx-3 text-danger">Rescheduled</span>
+                    <div className="text-primary">
+                      <CalendarTodayIcon />
+                      <span className="mx-3 text-primary">Rescheduled</span>
                     </div>
                   ) : row.status === "accepted" ? (
                     <div className="text-success">
