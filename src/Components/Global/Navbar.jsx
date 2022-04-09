@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { axiosConfig } from "../../utils/axiosConfig";
 import { studentSignOut } from "../../utils/api";
 import toast, { Toaster } from "react-hot-toast";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import { Avatar, Button, Popover, Typography } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -15,6 +15,9 @@ export default function Navbar({ isAuth }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const location = useLocation();
+
+  const type = location.pathname.split("/")[1];
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -45,114 +48,208 @@ export default function Navbar({ isAuth }) {
       });
   };
 
-  // console.log("ada", isAuth);
+  const handleCollegeSignOut = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    axiosConfig
+      .get("/college/signout")
+      .then((res) => {
+        if (res.status !== 200) return;
+        localStorage.clear();
+        history.push("/college/signin");
+        toast.success("Logout Successfull");
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log("ada", err.message);
+        setLoading(false);
+        toast.error("There was an error");
+      });
+  };
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   return (
-    <div className={styles.parent + " bg-light"}>
-      <nav
-        className={
-          " navbar navbar-expand-lg navbar-light bg-light container  py-3"
-        }
-      >
-        <a className="navbar-brand fw-bold" href="#">
-          Don't Go Depresso
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div
-          className="collapse navbar-collapse justify-content-center"
-          id="navbarNavAltMarkup"
-        >
-          <div className="navbar-nav">
-            <Link className="nav-item nav-link mx-2" to="/">
-              Home
-            </Link>
-            <Link className="nav-item nav-link mx-2" to="/blogs">
-              Blogs
-            </Link>
-            <Link className="nav-item nav-link mx-2" to="/quotes">
-              Quotes
-            </Link>
-            <a className="nav-item nav-link mx-2" href="#">
-              Videos
+    <div className={styles.parent}>
+      {type === "college" ? (
+        <>
+          <nav className={" navbar navbar-expand-lg navbar-dark px-4  py-2"}>
+            <a className="navbar-brand fw-bold" href="#">
+              Don't Go Depresso
             </a>
-            <Link className="nav-item nav-link mx-2" to="/">
-              About Us
-            </Link>
-            <a className="nav-item nav-link mx-2" href="#">
-              Contact Us
-            </a>
-          </div>
-        </div>
-        {isAuth ? (
-          <div className="d-flex align-items-center">
-            <div className="mx-3">
-              <span className="mx-3">
-                <NotificationsIcon />
-              </span>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div
+              className="collapse navbar-collapse justify-content-center"
+              id="navbarNavAltMarkup"
+            >
+              <div className="navbar-nav">
+                <Link
+                  className="nav-item nav-link mx-2"
+                  to="/college/add-emails"
+                >
+                  Add Students
+                </Link>
+                <Link
+                  className="nav-item nav-link mx-2"
+                  to="/college/add-emails"
+                >
+                  Add Students
+                </Link>
+                <Link
+                  className="nav-item nav-link mx-2"
+                  to="/college/add-emails"
+                >
+                  Add Students
+                </Link>
+              </div>
             </div>
+            {isAuth ? (
+              <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center">
+                  {/* <Avatar
+                    alt="Cindy Baker"
+                    src="https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg"
+                  />
+                  <p className="ms-3 me-2 mb-0 text-light">
+                    {user.studentName}
+                  </p> */}
+
+                  <Typography sx={{ px: 2 }}>
+                    <button
+                      disabled={loading}
+                      onClick={handleCollegeSignOut}
+                      className="btn"
+                    >
+                      Sign Out
+                    </button>
+                  </Typography>
+                </div>
+              </div>
+            ) : (
+              <>
+                <Link to="/student/signin">
+                  <div className={styles.loginBtn}>Signin</div>
+                </Link>
+              </>
+            )}
+          </nav>
+        </>
+      ) : type === "counsellor" ? (
+        "counsellor"
+      ) : (
+        <nav className={" navbar navbar-expand-lg navbar-dark px-4  py-2"}>
+          <a className="navbar-brand fw-bold" href="#">
+            Don't Go Depresso
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div
+            className="collapse navbar-collapse justify-content-center"
+            id="navbarNavAltMarkup"
+          >
+            <div className="navbar-nav">
+              <Link className="nav-item nav-link mx-2" to="/">
+                Home
+              </Link>
+              <Link className="nav-item nav-link mx-2" to="/blogs">
+                Blogs
+              </Link>
+              <Link className="nav-item nav-link mx-2" to="/quotes">
+                Quotes
+              </Link>
+              <a className="nav-item nav-link mx-2" href="#">
+                Videos
+              </a>
+              <Link className="nav-item nav-link mx-2" to="/">
+                About Us
+              </Link>
+              <a className="nav-item nav-link mx-2" href="#">
+                Contact Us
+              </a>
+            </div>
+          </div>
+          {isAuth ? (
             <div className="d-flex align-items-center">
-              <Avatar
-                alt="Cindy Baker"
-                src="https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg"
-              />
-              <p className="mx-3 mb-0 text-dark ">Terry B. Han</p>
-              <span className="btn" onClick={handleClick}>
-                <KeyboardArrowDownIcon />
-              </span>
-              <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "center",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "center",
-                }}
-              >
-                <Typography sx={{ px: 2 }}>
-                  <div className="btn">
-                    <Link className="text-dark" to="/student/dashboard">
-                      Dashboard
-                    </Link>
-                  </div>
-                </Typography>
-                <Typography sx={{ px: 2 }}>
-                  <div className="btn">Profile</div>
-                </Typography>
-                <Typography sx={{ px: 2 }}>
-                  <button
-                    disabled={loading}
-                    onClick={handleSignOut}
-                    className="btn"
-                  >
-                    Sign Out
-                  </button>
-                </Typography>
-              </Popover>
+              <div className="d-flex align-items-center">
+                <Avatar
+                  alt="Cindy Baker"
+                  src="https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg"
+                />
+                <p className="ms-3 me-2 mb-0 text-light">
+                  {user ? user.studentName : ""}
+                </p>
+                <span className="btn" onClick={handleClick}>
+                  <KeyboardArrowDownIcon style={{ color: "#fff" }} />
+                </span>
+                <Popover
+                  id={id}
+                  open={open}
+                  anchorEl={anchorEl}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                  }}
+                >
+                  <Typography sx={{ px: 2 }}>
+                    <div className="btn">
+                      <Link className="text-dark" to="/student/dashboard">
+                        Dashboard
+                      </Link>
+                    </div>
+                  </Typography>
+                  <Typography sx={{ px: 2 }}>
+                    <div className="btn">
+                      <Link className="text-dark" to="/student/view-profile">
+                        Profile
+                      </Link>
+                    </div>
+                  </Typography>
+                  <Typography sx={{ px: 2 }}>
+                    <button
+                      disabled={loading}
+                      onClick={handleSignOut}
+                      className="btn"
+                    >
+                      Sign Out
+                    </button>
+                  </Typography>
+                </Popover>
+              </div>
             </div>
-          </div>
-        ) : (
-          <>
-            <Link to="/student/signin">
-              <div className={styles.loginBtn}>Login</div>
-            </Link>
-          </>
-        )}
-      </nav>
+          ) : (
+            <>
+              <Link to="/student/signin">
+                <div className={styles.loginBtn}>Signin</div>
+              </Link>
+            </>
+          )}
+        </nav>
+      )}
       <Toaster position="top-right" />
     </div>
   );
