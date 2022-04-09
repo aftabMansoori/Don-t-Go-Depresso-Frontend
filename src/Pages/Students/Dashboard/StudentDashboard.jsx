@@ -18,10 +18,13 @@ import DateTimePicker from "@mui/lab/DateTimePicker";
 
 export default function StudentDashboard() {
   const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(new Date());
 
   const handleClick = () => {
     setOpen(!open);
   };
+
+  console.log("ada", value);
 
   return (
     <>
@@ -52,10 +55,10 @@ export default function StudentDashboard() {
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DateTimePicker
                 renderInput={(params) => <TextField {...params} />}
-                // value={value}
-                // onChange={(newValue) => {
-                //   setValue(newValue);
-                // }}
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
               />
             </LocalizationProvider>
           </div>

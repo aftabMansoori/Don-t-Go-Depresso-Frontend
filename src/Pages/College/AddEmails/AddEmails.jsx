@@ -1,14 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@mui/material";
 import toast, { Toaster } from "react-hot-toast";
 import { axiosConfig } from "../../../utils/axiosConfig";
 
 import styles from "./AddEmails.module.scss";
 
+//Material UI
+import { PersonAdd } from "@mui/icons-material";
+
+//Components
+import StudentMails from "../../../Components/College/StudentMails/StudentMails";
+
 export default function AddEmails() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [file, setFile] = useState(null);
+  const [studentMails, setStudentMails] = useState([]);
+
+  useEffect(() => {
+    getAllMails();
+  }, []);
+
+  const getAllMails = () => {
+    setLoading(true);
+
+    axiosConfig
+      .get("/college/get-emails")
+      .then((res) => {
+        if (res.status !== 200) return;
+        setStudentMails(res.data.mails);
+        console.log("ada", res.data.mails, studentMails);
+        setLoading(false);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+        setLoading(false);
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +48,7 @@ export default function AddEmails() {
       .then((res) => {
         if (res.status !== 201) return;
         toast.success(res.data.message);
+        getAllMails();
         setEmail("");
         setLoading(false);
       })
@@ -48,9 +77,8 @@ export default function AddEmails() {
   return (
     <>
       <section className={styles.parent}>
-        <div className={styles.addEmailForm}>
-          <h1 className="text-center">Add Email</h1>
-          <div className="d-flex align-items-center justify-content-center">
+        <div className={styles.addEmailForm + " container"}>
+          <div className="d-flex align-items-center justify-content-cente">
             <TextField
               id="outlined-basic"
               label="Email"
@@ -58,18 +86,18 @@ export default function AddEmails() {
               variant="outlined"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              size="small"
             />
             <button
               disabled={loading}
               onClick={handleSubmit}
-              className="btn btn-primary mx-3"
+              className="btn btn-primary mx-3 mb-2 p-2"
             >
-              Add
+              <PersonAdd />
             </button>
           </div>
         </div>
-        <hr />
-        <div>
+        {/* <div>
           <h1>Add email in bulk</h1>
           <div className="mt-4 mb-4 d-flex align-items-center justify-content-around">
             <div className="p-0 d-flex align-items-center">
@@ -95,7 +123,8 @@ export default function AddEmails() {
               Add
             </button>
           </div>
-        </div>
+        </div> */}
+        <StudentMails studentMails={studentMails} loading={loading} />
         <Toaster position="top-right" reverseOrder={false} />
       </section>
     </>
