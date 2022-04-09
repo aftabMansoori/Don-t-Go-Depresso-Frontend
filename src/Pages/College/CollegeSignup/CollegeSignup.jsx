@@ -58,13 +58,6 @@ export default function CollegeSignup() {
       fullWidth={"100vw"}
     >
       <div className={styles.parent}>
-        <div className="container my-5">
-          <ArrowBackIcon
-            fontSize="large"
-            className="btn p-0 m-0"
-            onClick={() => handleBack()}
-          />
-        </div>
         <h1 className="mb-5">CollegeSignup</h1>
         <div className={styles.signupForm}>
           <div>

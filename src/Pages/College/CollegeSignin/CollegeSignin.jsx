@@ -38,13 +38,14 @@ export default function CollegeSignin() {
           localStorage.setItem("token", JSON.stringify(res.data.token));
           localStorage.setItem("user", JSON.stringify(user));
           localStorage.setItem("isAuth", true);
-          toast.success("Login Successfull!");
           history.push("/college/dashboard");
+          window.location.reload(false);
+          toast.success("Login Successfull!");
           setLoading(false);
         })
         .catch((err) => {
           toast.error("There was an Error. Please try again later");
-          console.log("ada", err.message);
+          console.log("ada", err.response.data.message);
           setLoading(false);
         });
     }
@@ -64,13 +65,13 @@ export default function CollegeSignin() {
       fullWidth={"100vw"}
     >
       <div className={styles.parent}>
-        <div className="container my-5">
+        {/* <div className="container my-5">
           <ArrowBackIcon
             fontSize="large"
             className="btn p-0 m-0"
             onClick={() => handleBack()}
           />
-        </div>
+        </div> */}
         <div className={styles.signinForm}>
           <h1>College Signin</h1>
           <div>
