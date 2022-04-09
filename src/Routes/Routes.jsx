@@ -9,7 +9,7 @@ import Blogs from "../Pages/Blogs/Blogs";
 //College
 import CollegeSignup from "../Pages/College/CollegeSignup/CollegeSignup";
 import CollegeSignin from "../Pages/College/CollegeSignin/CollegeSignin";
-import CollegeDashboard from "../Pages/College/CollegeDashboard";
+import CollegeDashboard from "../Pages/College/CollegeDashboard/CollegeDashboard";
 import AddEmails from "../Pages/College/AddEmails/AddEmails";
 //Student
 import StudentSignUp from "../Pages/Students/StudentSignUp/StudentSignUp";
