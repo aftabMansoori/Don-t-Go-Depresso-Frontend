@@ -30,16 +30,16 @@ export default function CSSignin() {
         maxWidth={"100vw"}
         fullWidth={"100vw"}
       >
-        <div className="container my-5">
-          <ArrowBackIcon
+        <div className="container ">
+          {/* <ArrowBackIcon
             fontSize="large"
             className="btn p-0 m-0"
             onClick={() => handleBack()}
-          />
+          /> */}
           <section className={styles.parent}>
             <div className={styles.loginForm}>
-              <h1 className="text-center">Sign in</h1>
-              <p className="text-center">Sign in to safe mental space!</p>
+              <h1 className="text-center">Counsellor Signin</h1>
+              {/* <p className="text-center">Sign in to safe mental space!</p> */}
               <div>
                 <TextField
                   id="outlined-basic"
