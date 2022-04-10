@@ -11,6 +11,7 @@ import CollegeSignup from "../Pages/College/CollegeSignup/CollegeSignup";
 import CollegeSignin from "../Pages/College/CollegeSignin/CollegeSignin";
 import CollegeDashboard from "../Pages/College/CollegeDashboard/CollegeDashboard";
 import AddEmails from "../Pages/College/AddEmails/AddEmails";
+import Counsellor from "../Pages/College/Counsellor/Counsellor";
 //Student
 import StudentSignUp from "../Pages/Students/StudentSignUp/StudentSignUp";
 import StudentSignin from "../Pages/Students/StudentSignIn/StudentSignin";
@@ -58,13 +59,26 @@ export default function Routes() {
 
           {/* College Routes */}
           <Route exact path="/college/signup" component={CollegeSignup} />
-          <Route exact path="/college/signin" component={CollegeSignin} />
+          <Route
+            exact
+            path={["/college/signin", "/college"]}
+            component={CollegeSignin}
+          />
           <PrivateRoutes
             exact
             path="/college/dashboard"
             component={CollegeDashboard}
           />
-          <Route exact path="/college/add-emails" component={AddEmails} />
+          <PrivateRoutes
+            exact
+            path="/college/add-emails"
+            component={AddEmails}
+          />
+          <PrivateRoutes
+            exact
+            path="/college/counsellor"
+            component={Counsellor}
+          />
 
           {/* Counsellor */}
           <Route exact path="/counsellor/signin" component={CSSignin} />

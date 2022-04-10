@@ -7,6 +7,11 @@ html {
   a {
     text-decoration: none;
   }
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+  }
 }
 
 body {
@@ -17,6 +22,12 @@ body {
   h3 {
     font-family: "Proza Libre", sans-serif;
     font-weight: 600;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
   }
 }
 
