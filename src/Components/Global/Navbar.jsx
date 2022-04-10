@@ -96,21 +96,21 @@ export default function Navbar({ isAuth }) {
               <div className="navbar-nav">
                 <Link
                   className="nav-item nav-link mx-2"
-                  to="/college/add-emails"
+                  to="/college/dashboard"
                 >
-                  Add Students
+                  Dashboard
                 </Link>
                 <Link
                   className="nav-item nav-link mx-2"
                   to="/college/add-emails"
                 >
-                  Add Students
+                  Students
                 </Link>
                 <Link
                   className="nav-item nav-link mx-2"
-                  to="/college/add-emails"
+                  to="/college/counsellor"
                 >
-                  Add Students
+                  Counsellor
                 </Link>
               </div>
             </div>
@@ -129,7 +129,7 @@ export default function Navbar({ isAuth }) {
                     <button
                       disabled={loading}
                       onClick={handleCollegeSignOut}
-                      className="btn"
+                      className="btn btn-outline-light"
                     >
                       Sign Out
                     </button>
