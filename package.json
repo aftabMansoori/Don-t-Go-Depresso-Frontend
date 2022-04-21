@@ -25,7 +25,8 @@
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
     "sass": "^1.49.0",
-    "simple-peer": "^9.11.0",
+    "shortid": "^2.2.16",
+    "simple-peer": "^9.11.1",
     "socket.io-client": "^4.4.1",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2"
