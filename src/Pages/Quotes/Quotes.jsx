@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import Skeleton from "@mui/material/Skeleton";
 
 import styles from "./Quotes.module.scss";
 
@@ -60,7 +61,17 @@ export default function Quotes() {
               fontSize="large"
             />
             <div className="w-50">
-              <h1>{qod.content}</h1>
+              <h1>
+                {loading ? (
+                  <>
+                    <Skeleton />
+                    <Skeleton animation="wave" />
+                    <Skeleton animation={false} />
+                  </>
+                ) : (
+                  qod.content
+                )}
+              </h1>
               <p className="fst-italic">- {qod.author}</p>
             </div>
             <FormatQuoteIcon fontSize="large" />
@@ -68,24 +79,32 @@ export default function Quotes() {
           <div className="row m-0 p-0">
             {quotes.map((quote, index) => (
               <div key={index} className={" col-md-4 col-sm-6 col-12 p-3"}>
-                <div className={styles.quoteCard + " "}>
-                  <div className="text-center">
-                    <FormatQuoteIcon fontSize="large" />
+                {loading ? (
+                  <>
+                    <Skeleton />
+                    <Skeleton animation="wave" />
+                    <Skeleton animation={false} />
+                  </>
+                ) : (
+                  <div className={styles.quoteCard + " "}>
+                    <div className="text-center">
+                      <FormatQuoteIcon fontSize="large" />
+                    </div>
+                    <p>{quote.content}</p>
+                    <p className="fst-italic small">- {quote.author}</p>
+                    <div className="small">
+                      <span>tags: </span>
+                      {quote.tags.map((tag, i) => (
+                        <span
+                          key={i}
+                          className="mx-1 bg-primary py-1 px-2 rounded text-white small"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <p>{quote.content}</p>
-                  <p className="fst-italic small">- {quote.author}</p>
-                  <div className="small">
-                    <span>tags: </span>
-                    {quote.tags.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="mx-1 bg-primary py-1 px-2 rounded text-white small"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                )}
               </div>
             ))}
           </div>
@@ -94,3 +113,7 @@ export default function Quotes() {
     </>
   );
 }
+
+// <Skeleton />
+// <Skeleton animation="wave" />
+// <Skeleton animation={false} />
