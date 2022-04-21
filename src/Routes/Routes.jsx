@@ -27,6 +27,8 @@ import PrivateRoutes from "./PrivateRoute";
 
 //VideoCall
 import VideoCall from "../Pages/VideoCall/VideoCall";
+import { GoToRoomInput } from "../Components/VideoCall/GoToRoomInput";
+import Video from "../Components/VideoCall/video";
 
 export default function Routes() {
   const isAuth = JSON.parse(localStorage.getItem("token"));
@@ -85,10 +87,12 @@ export default function Routes() {
           <Route exact path="/counsellor/dashboard" component={CSDashboard} />
 
           {/* <Route exact path="/college/dashboard" component={CollegeDashboard} /> */}
-          <Route exact path="/" component={Home} />
+          {/* <Route exact path="/" component={Home} /> */}
           <Route exact path="/quotes" component={Quotes} />
-          <Route exact path="/blogs" component={Blogs} />
-          <Route exact path="/videocall" component={VideoCall} />
+          <Route exact path={["/blogs", "/"]} component={Blogs} />
+          {/* <Route exact path="/videocall" component={VideoCall} /> */}
+          <Route path="/call" exact component={GoToRoomInput} />
+          <Route path="/call/:roomId" exact component={Video} />
         </Switch>
       </Router>
     </>

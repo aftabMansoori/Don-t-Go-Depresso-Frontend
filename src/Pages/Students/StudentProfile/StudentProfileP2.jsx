@@ -103,7 +103,7 @@ export default function StudentProfileP2() {
             <div>
               <button
                 className="btn"
-                onClick={() => history.push("/student/dashboard")}
+                onClick={() => history.push("/student/signin")}
               >
                 Skip
               </button>

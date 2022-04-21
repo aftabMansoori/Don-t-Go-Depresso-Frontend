@@ -89,7 +89,6 @@ export default function AddEmails() {
 
   return (
     <>
-      {/* <section className={styles.parent}> */}
       <div className="container my-4">
         <div className="row">
           <div className="col-2 my-4 text-center">
@@ -167,7 +166,6 @@ export default function AddEmails() {
         </div>
 
         <Toaster position="top-right" reverseOrder={false} />
-        {/* </section> */}
       </div>
     </>
   );

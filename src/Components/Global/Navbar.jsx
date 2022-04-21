@@ -146,7 +146,52 @@ export default function Navbar({ isAuth }) {
           </nav>
         </>
       ) : type === "counsellor" ? (
-        "counsellor"
+        <>
+          <nav className={" navbar navbar-expand-lg navbar-dark px-4  py-2"}>
+            <a className="navbar-brand fw-bold" href="#">
+              Don't Go Depresso
+            </a>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div
+              className="collapse navbar-collapse justify-content-center"
+              id="navbarNavAltMarkup"
+            >
+              <div className="navbar-nav">
+                <Link className="nav-item nav-link mx-2" to="/">
+                  About Us
+                </Link>
+                {/* <Link className="nav-item nav-link mx-2" to="/">
+                Home
+              </Link> */}
+                <Link className="nav-item nav-link mx-2" to="/blogs">
+                  Blogs
+                </Link>
+                <Link className="nav-item nav-link mx-2" to="/quotes">
+                  Quotes
+                </Link>
+                <a className="nav-item nav-link mx-2" href="#">
+                  Videos
+                </a>
+                <a className="nav-item nav-link mx-2" href="#">
+                  Contact Us
+                </a>
+              </div>
+            </div>
+            <Link to="/student/signin">
+              <div className={" btn btn-outline-light"}>Sign Out</div>
+            </Link>
+          </nav>
+        </>
       ) : (
         <nav className={" navbar navbar-expand-lg navbar-dark px-4  py-2"}>
           <a className="navbar-brand fw-bold" href="#">
@@ -169,8 +214,11 @@ export default function Navbar({ isAuth }) {
           >
             <div className="navbar-nav">
               <Link className="nav-item nav-link mx-2" to="/">
-                Home
+                About Us
               </Link>
+              {/* <Link className="nav-item nav-link mx-2" to="/">
+                Home
+              </Link> */}
               <Link className="nav-item nav-link mx-2" to="/blogs">
                 Blogs
               </Link>
@@ -180,9 +228,6 @@ export default function Navbar({ isAuth }) {
               <a className="nav-item nav-link mx-2" href="#">
                 Videos
               </a>
-              <Link className="nav-item nav-link mx-2" to="/">
-                About Us
-              </Link>
               <a className="nav-item nav-link mx-2" href="#">
                 Contact Us
               </a>
