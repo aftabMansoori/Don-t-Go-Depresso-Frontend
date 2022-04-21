@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./AddCounsellor.module.scss";
+import styles from "./Counsellor.module.scss";
 
 //MUI
 import { TextField } from "@mui/material";

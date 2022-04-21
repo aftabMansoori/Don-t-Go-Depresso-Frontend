@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 //Compoennts
 import AddCounsellor from "../../../Components/College/Counsellor/AddCounsellor";
+import CounsellorCard from "../../../Components/College/Counsellor/CounsellorCard";
 
 import styled from "styled-components";
 
@@ -23,10 +24,7 @@ export default function Counsellor() {
     <>
       <div className="container my-4">
         <div className="row">
-          <div
-            className="col-2 my-4 text-center"
-            // style={{ height: "60vh" }}
-          >
+          <div className="col-2 my-4 text-center">
             {tabs.map((tab) =>
               activeTab === tab.id ? (
                 <ActiveTab
@@ -43,7 +41,15 @@ export default function Counsellor() {
             )}
           </div>
           <div className="col-8">
-            {activeTab === 1 ? <AddCounsellor /> : ""}
+            {activeTab === 1 ? (
+              <AddCounsellor />
+            ) : (
+              <div className="container">
+                <div className="row ">
+                  <CounsellorCard />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

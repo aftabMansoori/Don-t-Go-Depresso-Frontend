@@ -1,0 +1,35 @@
+.parent {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.counsellorCard {
+  background: #614385; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #516395,
+    #614385
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #516395,
+    #614385
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  margin: 10px;
+  border-radius: 10px;
+  text-align: center;
+
+  img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+  }
+}
