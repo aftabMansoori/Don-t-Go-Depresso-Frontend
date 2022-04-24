@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
 //Components
 import Home from "../Pages/Home";
@@ -19,6 +24,7 @@ import StudentProfile from "../Pages/Students/StudentProfile/StudentProfile";
 import StudentProfileP2 from "../Pages/Students/StudentProfile/StudentProfileP2";
 import StudentDashboard from "../Pages/Students/Dashboard/StudentDashboard";
 import ViewProfile from "../Pages/Students/StudentProfile/ViewProfile";
+import Quiz from "../Pages/Students/Quiz/Quiz";
 //Counsellor
 import CSSignin from "../Pages/Counsellor/CSSignin/CSSignin";
 import CSDashboard from "../Pages/Counsellor/CSSchedules/CSDashboard";
@@ -57,7 +63,14 @@ export default function Routes() {
             path="/student/dashboard"
             component={StudentDashboard}
           />
-          <Route exact path="/student/view-profile" component={ViewProfile} />
+          <PrivateRoutes
+            exact
+            path="/student/view-profile"
+            component={ViewProfile}
+          />
+          <PrivateRoutes exact path="/student/questionaire">
+            <Quiz nav={nav} setNav={setNav} />
+          </PrivateRoutes>
 
           {/* College Routes */}
           <Route exact path="/college/signup" component={CollegeSignup} />
@@ -86,11 +99,8 @@ export default function Routes() {
           <Route exact path="/counsellor/signin" component={CSSignin} />
           <Route exact path="/counsellor/dashboard" component={CSDashboard} />
 
-          {/* <Route exact path="/college/dashboard" component={CollegeDashboard} /> */}
-          {/* <Route exact path="/" component={Home} /> */}
           <Route exact path="/quotes" component={Quotes} />
           <Route exact path={["/blogs", "/"]} component={Blogs} />
-          {/* <Route exact path="/videocall" component={VideoCall} /> */}
           <Route path="/call" exact component={GoToRoomInput} />
           <Route path="/call/:roomId" exact component={Video} />
         </Switch>

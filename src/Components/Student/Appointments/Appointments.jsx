@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,6 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
+import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
@@ -27,6 +29,15 @@ const rows = [
 ];
 
 export default function Appointments() {
+  const history = useHistory();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userName = user.studentName.toLowerCase().split(" ").join("");
+
+  const startCall = () => {
+    history.push(`/call/${userName}`);
+  };
+
   return (
     <>
       <TableContainer>
@@ -41,6 +52,24 @@ export default function Appointments() {
             </TableRow>
           </TableHead>
           <TableBody>
+            <TableRow
+            // style={{
+            //   background: "rgba(200,200,200,1)",
+            //   margin: "5px 0",
+            //   padding: "0",
+            // }}
+            >
+              <TableCell>0</TableCell>
+              <TableCell component="th" scope="row">
+                22 April, 2022
+              </TableCell>
+              <TableCell>Counsellor Name</TableCell>
+              <TableCell>
+                <button className="btn btn-success" onClick={() => startCall()}>
+                  <VideocamOutlinedIcon /> Start
+                </button>
+              </TableCell>
+            </TableRow>
             {rows.map((row, index) => (
               <TableRow
                 key={index}

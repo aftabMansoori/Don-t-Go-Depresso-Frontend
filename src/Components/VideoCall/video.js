@@ -11,6 +11,8 @@ import {
   CamOffIcon,
 } from "./Icons";
 
+import CloseIcon from "@mui/icons-material/Close";
+
 class Video extends React.Component {
   constructor() {
     super();
@@ -171,6 +173,15 @@ class Video extends React.Component {
         />
 
         <div className="controls">
+          <button
+            className="control-btn"
+            onClick={() => {
+              this.setVideoLocal();
+            }}
+          >
+            <CloseIcon className="text-success" />
+          </button>
+
           <button
             className="control-btn"
             onClick={() => {
