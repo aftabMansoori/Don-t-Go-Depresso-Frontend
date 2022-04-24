@@ -69,7 +69,7 @@ export default function Routes() {
             component={ViewProfile}
           />
           <PrivateRoutes exact path="/student/questionaire">
-            <Quiz nav={nav} setNav={setNav} />
+            <Quiz />
           </PrivateRoutes>
 
           {/* College Routes */}
