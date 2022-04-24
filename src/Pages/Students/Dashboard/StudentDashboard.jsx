@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
 //Components
 import Appointments from "../../../Components/Student/Appointments/Appointments";
@@ -10,21 +11,14 @@ import {
   DialogContentText,
   DialogTitle,
   Button,
-  TextField,
 } from "@mui/material";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DateTimePicker from "@mui/lab/DateTimePicker";
 
 export default function StudentDashboard() {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(new Date());
 
   const handleClick = () => {
     setOpen(!open);
   };
-
-  console.log("ada", value);
 
   return (
     <>
@@ -44,29 +38,17 @@ export default function StudentDashboard() {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            {"Select the schedule"}
+            <h4 className="mb-0 mt-2">{"Request for an Appointment"}</h4>
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              The schedule can vary according to counsellors availabilty
+              An appoinment request will be send to the counsellor with your
+              profile.
             </DialogContentText>
           </DialogContent>
-          <div className="d-flex align-items-center justify-content-center">
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DateTimePicker
-                renderInput={(params) => <TextField {...params} />}
-                value={value}
-                onChange={(newValue) => {
-                  setValue(newValue);
-                }}
-              />
-            </LocalizationProvider>
-          </div>
           <DialogActions>
-            <Button onClick={handleClick}>Cancel</Button>
-            <Button onClick={handleClick} autoFocus>
-              Okay
-            </Button>
+            <CancelBtn onClick={handleClick}>Cancel</CancelBtn>
+            <ReqBtn onClick={handleClick}>Request</ReqBtn>
           </DialogActions>
         </Dialog>
         <Appointments />
@@ -74,3 +56,45 @@ export default function StudentDashboard() {
     </>
   );
 }
+
+const ReqBtn = styled.button`
+  border: none;
+  background: #614385; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #516395,
+    #614385
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #516395,
+    #614385
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 10px 30px;
+  margin: 10px;
+  width: 150px;
+  color: white;
+  border-radius: 20px;
+  font-weight: 600;
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
+const CancelBtn = styled.button`
+  border: none;
+  padding: 8px 30px;
+  margin: 10px;
+  border-radius: 20px;
+  border: 2px solid #614385;
+  background: none;
+  width: 150px;
+  color: #614385;
+  font-weight: 600;
+
+  &:hover {
+    background: none;
+    color: #614385;
+    transform: scale(1.1);
+  }
+`;
