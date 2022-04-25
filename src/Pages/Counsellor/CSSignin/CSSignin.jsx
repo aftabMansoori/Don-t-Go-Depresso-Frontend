@@ -1,53 +1,67 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import toast, { Toaster } from "react-hot-toast";
-import { Link } from "react-router-dom";
 import { axiosConfig } from "../../../utils/axiosConfig";
+import { counsellorSignin } from "../../../utils/api";
 
 import { TextField, Button, Dialog } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import styles from "./CSSignin.module.scss";
 
 export default function CSSignin() {
   const history = useHistory();
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(true);
 
-  const handleBack = () => {
-    setOpen(false);
-    history.push("/");
+  const handleSubmit = () => {
+    setLoading(true);
+
+    axiosConfig
+      .post(counsellorSignin, {
+        username,
+        password,
+        role: "counsellor",
+      })
+      .then((res) => {
+        if (res.status !== 200) return;
+        let user = res.data.user;
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("isAuth", true);
+        history.push("/counsellor/dashboard");
+        toast.success("Login Successfull!");
+        setLoading(false);
+      })
+      .catch((err) => {
+        toast.error("There was an Error. Please try again later");
+        console.log("ada", err.response.data.message);
+        setLoading(false);
+      });
+    setLoading(false);
   };
 
   return (
     <>
       <Dialog
-        open={open}
-        fullScreen={open}
+        open={true}
+        fullScreen={true}
         maxWidth={"100vw"}
         fullWidth={"100vw"}
       >
         <div className="container ">
-          {/* <ArrowBackIcon
-            fontSize="large"
-            className="btn p-0 m-0"
-            onClick={() => handleBack()}
-          /> */}
           <section className={styles.parent}>
             <div className={styles.loginForm}>
               <h1 className="text-center">Counsellor Signin</h1>
-              {/* <p className="text-center">Sign in to safe mental space!</p> */}
               <div>
                 <TextField
                   id="outlined-basic"
-                  label="Email"
+                  label="Username"
                   margin="normal"
                   variant="outlined"
                   fullWidth
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
               <div>
@@ -66,7 +80,7 @@ export default function CSSignin() {
               </div>
               <Button
                 disabled={loading}
-                // onClick={handleSubmit}
+                onClick={() => handleSubmit()}
                 fullWidth
                 variant="contained"
                 type="submit"
