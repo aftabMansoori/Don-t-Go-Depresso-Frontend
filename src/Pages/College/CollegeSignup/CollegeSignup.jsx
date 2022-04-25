@@ -1,18 +1,14 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-// import { collegeRegister } from "../../../redux/action/collegeAction";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import toast, { Toaster } from "react-hot-toast";
 
 import { TextField, Button, Dialog } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import styles from "./CollegeSignup.module.scss";
 
 export default function CollegeSignup() {
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const [college, setCollege] = useState({
@@ -43,11 +39,6 @@ export default function CollegeSignup() {
         console.log(err.message);
         toast.error("There was an error");
       });
-  };
-
-  const handleBack = () => {
-    setOpen(false);
-    history.push("/");
   };
 
   return (
