@@ -9,9 +9,13 @@ export const collegeSignIn = (collegeCode, password) => `/college/signin`;
 export const collegeSignOut = () => `/college/signout`;
 export const collegeAddEmails = () => `/college/add-emails`;
 export const collegeGetEmails = () => `/college/get-emails`;
+export const addCollegeCounsellor = "/college/addcounsellor";
 
 //Student
 export const studentSignUp = () => `/student/signup`;
 export const studentSignIn = () => `/student/signin`;
 export const studentSignOut = `/student/signout`;
 export const studentProfile = () => `/student/profile`;
+
+//Counsellor
+export const counsellorSignin = "/counsellor/signin";
