@@ -3,8 +3,10 @@ import { useHistory } from "react-router-dom";
 import { questions } from "./questions";
 import { calc } from "./logic";
 
+//Components
 import Question from "../../../Components/Student/Quiz/Question";
 import StartPage from "../../../Components/Student/Quiz/StartPage";
+import EndPage from "../../../Components/Student/Quiz/EndPage";
 
 import styles from "./Quiz.module.scss";
 import { Dialog } from "@mui/material";
@@ -24,8 +26,6 @@ export default function Quiz() {
     setPoints(point + points);
     setPage(page + 1);
   };
-
-  console.log("ada", points);
 
   return (
     <Dialog
@@ -56,7 +56,14 @@ export default function Quiz() {
           </div>
         ))}
         {page > -1 && page === pages && (
-          <div className={styles.parent}>
+          <>
+            <EndPage
+              points={points}
+              setPoints={setPoints}
+              answers={answers}
+              setAnswers={setAnswers}
+            />
+            {/* <div className={styles.parent}>
             <h1>ENd is near</h1>
             <button
               onClick={() => history.push("/student/dashboard")}
@@ -64,7 +71,8 @@ export default function Quiz() {
             >
               Go home
             </button>
-          </div>
+          </div> */}
+          </>
         )}
       </div>
     </Dialog>

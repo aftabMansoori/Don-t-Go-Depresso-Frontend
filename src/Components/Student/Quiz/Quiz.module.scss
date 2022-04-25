@@ -6,6 +6,20 @@
   justify-content: space-evenly;
 }
 
+.startPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("./q2.png");
+  justify-content: space-around;
+  width: 50%;
+  background-repeat: no-repeat;
+  background-position: 50% 250px;
+  // background-size: contain;
+  background-size: 80% 80%;
+}
+
 .startBtn {
   border: none;
   background: #614385; /* fallback for old browsers */
@@ -21,10 +35,13 @@
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   padding: 10px 30px;
   margin: 10px 20px;
-  width: 150px;
+  min-width: 150px;
+  text-align: center;
   color: white;
+  // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 20px;
   font-weight: 600;
+  cursor: pointer;
   &:hover {
     transform: scale(1.1);
   }
@@ -37,13 +54,12 @@
   border-radius: 20px;
   border: 2px solid #614385;
   background: none;
-  width: 150px;
+  min-width: 150px;
   color: #614385;
+  cursor: pointer;
   font-weight: 600;
-
+  text-align: center;
   &:hover {
-    background: none;
-    color: #614385;
     transform: scale(1.1);
   }
 }

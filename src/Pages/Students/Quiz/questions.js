@@ -134,15 +134,6 @@ export const questions = [
       "NEARLY EVERY DAY",
     ],
   },
-  // {
-  //   q: "",
-  // },
-  // {
-  //   q: "",
-  // },
-  // {
-  //   q: "",
-  // },
 ];
 
 // {

@@ -8,7 +8,7 @@ export default function StartPage({ incrementPage }) {
 
   return (
     <>
-      <div className={styles.parent + " container "}>
+      <div className={styles.startPage + " container "}>
         <h1 className="text-white">Start with the questions</h1>
         {/* <p className="w-50">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero
@@ -20,7 +20,7 @@ export default function StartPage({ incrementPage }) {
           <button onClick={incrementPage} className={styles.startBtn}>
             Start
           </button>
-          <button onClick={() => history.goBack()} className={styles.backBtn}>
+          <button onClick={() => history.goBack()} className={styles.startBtn}>
             Go Back
           </button>
         </div>
