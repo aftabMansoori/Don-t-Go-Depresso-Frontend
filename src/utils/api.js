@@ -16,6 +16,8 @@ export const studentSignUp = () => `/student/signup`;
 export const studentSignIn = () => `/student/signin`;
 export const studentSignOut = `/student/signout`;
 export const studentProfile = () => `/student/profile`;
+export const saveQuestionaire = "/student/save-questionaire";
+export const getResponse = "/student/response";
 
 //Counsellor
 export const counsellorSignin = "/counsellor/signin";

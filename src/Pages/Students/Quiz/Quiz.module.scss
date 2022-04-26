@@ -19,3 +19,38 @@
     #43c6ac
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
+.responses {
+  min-height: 100vh;
+  margin: 3rem 0;
+
+  p {
+    margin-bottom: 5px;
+    font-size: 18px;
+  }
+
+  .red {
+    margin: 1rem 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 0, 0, 0.1);
+  }
+  .yellow {
+    margin: 1rem 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: rgba(216, 250, 8, 0.1);
+  }
+  .green {
+    margin: 1rem 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.1);
+  }
+  .green2 {
+    margin: 1rem 0;
+    padding: 10px;
+    border-radius: 10px 20px;
+    background-color: rgba(0, 255, 0, 0.2);
+  }
+}

@@ -63,15 +63,6 @@ export default function Quiz() {
               answers={answers}
               setAnswers={setAnswers}
             />
-            {/* <div className={styles.parent}>
-            <h1>ENd is near</h1>
-            <button
-              onClick={() => history.push("/student/dashboard")}
-              className="btn"
-            >
-              Go home
-            </button>
-          </div> */}
           </>
         )}
       </div>

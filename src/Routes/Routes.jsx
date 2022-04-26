@@ -72,7 +72,7 @@ export default function Routes() {
           <PrivateRoutes exact path="/student/questionaire">
             <Quiz />
           </PrivateRoutes>
-          <PrivateRoutes exact path="/student/answers" component={Answers} />
+          <PrivateRoutes exact path="/student/response" component={Answers} />
 
           {/* College Routes */}
           <Route exact path="/college/signup" component={CollegeSignup} />

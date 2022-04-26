@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { studentLogin } from "../../../redux/action/studentAction";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -12,7 +10,6 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import styles from "./StudentSignin.module.scss";
 
 export default function StudentSignin() {
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const [email, setEmail] = useState();
@@ -21,9 +18,7 @@ export default function StudentSignin() {
   const [open, setOpen] = useState(true);
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
     setLoading(true);
-    // `${base_url}/student/signin`
     axiosConfig
       .post("/student/signin", {
         username: email,
@@ -32,7 +27,6 @@ export default function StudentSignin() {
       })
       .then((res) => {
         if (res.status !== 200) return;
-        // console.log("ada", res);
         localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("token", JSON.stringify(res.data.token));
         localStorage.setItem("isAuth", true);
@@ -49,8 +43,6 @@ export default function StudentSignin() {
 
     setLoading(false);
   };
-
-  const signIn = useSelector((state) => state.student);
 
   const handleBack = () => {
     setOpen(false);
