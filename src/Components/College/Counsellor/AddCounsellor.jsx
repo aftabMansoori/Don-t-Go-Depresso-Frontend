@@ -8,7 +8,7 @@ import styles from "./Counsellor.module.scss";
 //MUI
 import { TextField } from "@mui/material";
 
-export default function AddCounsellor() {
+export default function AddCounsellor({ handleCounsellorList }) {
   const [loading, setLoading] = useState(false);
   const [counsellorUserName, setCounsellorUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +24,7 @@ export default function AddCounsellor() {
         setLoading(false);
         setCounsellorUserName("");
         setPassword("");
+        handleCounsellorList();
         toast.success("Counsellor added successfully");
       })
       .catch((err) => {
