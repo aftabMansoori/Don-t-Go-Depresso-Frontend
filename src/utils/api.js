@@ -25,3 +25,4 @@ export const scheduleAppointment = "/student/scheduleappointment";
 
 //Counsellor
 export const counsellorSignin = "/counsellor/signin";
+export const getAppointmentCS = "/counsellor/getallappointment";
