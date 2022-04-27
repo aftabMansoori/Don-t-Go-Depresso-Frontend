@@ -17,7 +17,6 @@ export default function Answers() {
 
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [time, setTime] = useState("");
 
   useEffect(() => {
     handleGetResponse();
@@ -59,7 +58,7 @@ export default function Answers() {
               res.a === "NOT AT ALL"
                 ? styles.green
                 : res.a === "SEVERAL DAYS"
-                ? styles.green2
+                ? styles.green
                 : res.a === "NEARLY EVERY DAY"
                 ? styles.red
                 : styles.yellow
@@ -71,6 +70,10 @@ export default function Answers() {
         ))}
       </div>
     );
+  };
+
+  const timeHandler = (date) => {
+    return new Date(date).toLocaleString();
   };
 
   return (
@@ -87,7 +90,7 @@ export default function Answers() {
           onClick={() => history.push("/student/dashboard")}
         />
         <span className="mx-3 h3 mb-0">
-          {answers.length > 0 ? answers[0].time : "loading..."}
+          {answers.length > 0 ? timeHandler(answers[0].time) : "loading..."}
         </span>
       </div>
       {loading ? (

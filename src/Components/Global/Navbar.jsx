@@ -68,13 +68,25 @@ export default function Navbar({ isAuth }) {
       });
   };
 
+  const handleCSSignOut = () => {
+    setLoading(true);
+    localStorage.clear();
+    history.push("/counsellor/signin");
+    toast.success("Logout Successfull");
+    setLoading(false);
+  };
+
   const user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div className={styles.parent}>
       {type === "college" ? (
         <>
-          <nav className={" navbar navbar-expand-lg navbar-dark px-4  py-2"}>
+          <nav
+            className={
+              " navbar navbar-expand-lg navbar-dark px-4 py-2 container"
+            }
+          >
             <a className="navbar-brand fw-bold" href="#">
               Don't Go Depresso
             </a>
@@ -147,7 +159,11 @@ export default function Navbar({ isAuth }) {
         </>
       ) : type === "counsellor" ? (
         <>
-          <nav className={" navbar navbar-expand-lg navbar-dark px-4  py-2"}>
+          <nav
+            className={
+              " navbar navbar-expand-lg navbar-dark px-4 py-2 container"
+            }
+          >
             <a className="navbar-brand fw-bold" href="#">
               Don't Go Depresso
             </a>
@@ -167,33 +183,38 @@ export default function Navbar({ isAuth }) {
               id="navbarNavAltMarkup"
             >
               <div className="navbar-nav">
-                <Link className="nav-item nav-link mx-2" to="/">
-                  About Us
+                <Link
+                  className="nav-item nav-link mx-2"
+                  to="/counsellor/dashboard?p=scheduled"
+                >
+                  Scheduled
                 </Link>
-                {/* <Link className="nav-item nav-link mx-2" to="/">
-                Home
-              </Link> */}
-                <Link className="nav-item nav-link mx-2" to="/blogs">
-                  Blogs
+                <Link
+                  className="nav-item nav-link mx-2"
+                  to="/counsellor/dashboard?p=appointments"
+                >
+                  Appointments
                 </Link>
-                <Link className="nav-item nav-link mx-2" to="/quotes">
-                  Quotes
+                <Link
+                  className="nav-item nav-link mx-2"
+                  to="/counsellor/dashboard?p=history"
+                >
+                  History
                 </Link>
-                <a className="nav-item nav-link mx-2" href="#">
-                  Videos
-                </a>
-                <a className="nav-item nav-link mx-2" href="#">
-                  Contact Us
-                </a>
               </div>
             </div>
-            <Link to="/student/signin">
-              <div className={" btn btn-outline-light"}>Sign Out</div>
-            </Link>
+            <button
+              onClick={() => handleCSSignOut()}
+              className={" btn btn-outline-light"}
+            >
+              Sign Out
+            </button>
           </nav>
         </>
       ) : (
-        <nav className={" navbar navbar-expand-lg navbar-dark px-4  py-2"}>
+        <nav
+          className={" navbar navbar-expand-lg navbar-dark px-4 py-2 container"}
+        >
           <a className="navbar-brand fw-bold" href="#">
             Don't Go Depresso
           </a>
@@ -216,9 +237,6 @@ export default function Navbar({ isAuth }) {
               <Link className="nav-item nav-link mx-2" to="/">
                 About Us
               </Link>
-              {/* <Link className="nav-item nav-link mx-2" to="/">
-                Home
-              </Link> */}
               <Link className="nav-item nav-link mx-2" to="/blogs">
                 Blogs
               </Link>

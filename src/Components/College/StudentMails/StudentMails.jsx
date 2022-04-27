@@ -23,49 +23,63 @@ export default function StudentMails({ studentMails, loading }) {
           "loading..."
         ) : (
           <>
-            <div>
-              <div className="border border-secondary px-3 py-1 rounded-3 mb-3">
-                <SearchIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-                <SearchStyle type="text" placeholder="search..." />
-              </div>
-            </div>
-            <TableContainer>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell className="fw-bold">Sr. No</TableCell>
-                    <TableCell className="fw-bold">Email</TableCell>
-                    <TableCell></TableCell>
-                    {/* <TableCell></TableCell> */}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {studentMails.map((student, i) => (
-                    <TableRow
-                      key={student._id}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {i + 1}
-                      </TableCell>
-                      <TableCell>{student.studentMail}</TableCell>
-                      {/* <TableCell className="p-1"></TableCell> */}
-                      <TableCell className="p-1">
-                        <button className="btn btn-primary mx-1">
-                          <Edit className="mx-1" />
-                        </button>
-                        <button className="btn btn-danger mx-1">
-                          <span>
-                            <Delete className="mx-1" />
-                          </span>
-                          {/* Delete */}
-                        </button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            {studentMails.length > 0 ? (
+              <>
+                <div>
+                  <div className="border border-secondary px-3 py-1 rounded-3 mb-3">
+                    <SearchIcon
+                      sx={{ color: "action.active", mr: 1, my: 0.5 }}
+                    />
+                    <SearchStyle type="text" placeholder="search..." />
+                  </div>
+                </div>
+                <TableContainer>
+                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell className="fw-bold">Sr. No</TableCell>
+                        <TableCell className="fw-bold">Email</TableCell>
+                        <TableCell></TableCell>
+                        {/* <TableCell></TableCell> */}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {studentMails.map((student, i) => (
+                        <TableRow
+                          key={student._id}
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                        >
+                          <TableCell component="th" scope="row">
+                            {i + 1}
+                          </TableCell>
+                          <TableCell>{student.studentMail}</TableCell>
+                          {/* <TableCell className="p-1"></TableCell> */}
+                          <TableCell className="p-1">
+                            <button className="btn btn-primary mx-1">
+                              <Edit className="mx-1" />
+                            </button>
+                            <button className="btn btn-danger mx-1">
+                              <span>
+                                <Delete className="mx-1" />
+                              </span>
+                              {/* Delete */}
+                            </button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </>
+            ) : (
+              <NoData>
+                <img src="/Images/noData.svg" className="img-fluid" alt="" />
+                <h3>No Student Added</h3>
+                <p>Please add student to see the list of students.</p>
+              </NoData>
+            )}
           </>
         )}
       </div>
@@ -77,4 +91,25 @@ const SearchStyle = styled.input`
   border: none;
   padding: 5px 10px;
   color: rgb(100, 100, 100);
+`;
+
+const NoData = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem 0 0 0;
+
+  img {
+    width: 500px;
+  }
+
+  h3 {
+    margin: 3rem 0 0 0;
+    color: rgb(108, 99, 255);
+  }
+
+  p {
+    color: rgb(108, 99, 255);
+  }
 `;

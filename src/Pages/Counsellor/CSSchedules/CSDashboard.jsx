@@ -25,26 +25,6 @@ export default function CSSchedules() {
   return (
     <>
       <div className="container">
-        <div className="my-3 d-flex align-items-center justify-content-end">
-          <div
-            className="mx-3 btn p-0"
-            onClick={() => history.push({ search: "?p=scheduled" })}
-          >
-            Scheduled
-          </div>
-          <div
-            className="mx-3 btn p-0"
-            onClick={() => history.push({ search: "?p=appointments" })}
-          >
-            Appointments
-          </div>
-          <div
-            className="mx-3 btn p-0"
-            onClick={() => history.push({ search: "?p=history" })}
-          >
-            History
-          </div>
-        </div>
         {activeTab === 1 && (
           <>
             <Scheduled />

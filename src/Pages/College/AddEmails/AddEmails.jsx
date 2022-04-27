@@ -79,11 +79,11 @@ export default function AddEmails() {
   const tabs = [
     {
       id: 1,
-      label: "Add Student",
+      label: "Student Emails",
     },
     {
       id: 2,
-      label: "Student Emails",
+      label: "Add Student",
     },
   ];
 
@@ -94,21 +94,16 @@ export default function AddEmails() {
           <div className="col-2 my-4 text-center">
             {tabs.map((tab) =>
               activeTab === tab.id ? (
-                <ActiveTab
-                  className={" btn"}
-                  onClick={() => setActiveTab(tab.id)}
-                >
+                <ActiveTab onClick={() => setActiveTab(tab.id)}>
                   {tab.label}
                 </ActiveTab>
               ) : (
-                <p className={" btn"} onClick={() => setActiveTab(tab.id)}>
-                  {tab.label}
-                </p>
+                <Tab onClick={() => setActiveTab(tab.id)}>{tab.label}</Tab>
               )
             )}
           </div>
           <div className="col-8 my-4">
-            {activeTab === 1 ? (
+            {activeTab === 2 ? (
               <div className={styles.addEmailForm + " container"}>
                 <div className="d-flex align-items-center justify-content-center">
                   <TextField
@@ -184,7 +179,15 @@ const ActiveTab = styled.p`
     #614385
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: white;
-  &:hover {
-    color: white;
-  }
+  padding: 8px 20px;
+  margin: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+`;
+
+const Tab = styled.p`
+  padding: 8px 20px;
+  margin: 10px;
+  border-radius: 10px;
+  cursor: pointer;
 `;
