@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { axiosConfig } from "../../../utils/axiosConfig";
+import { getAppointments } from "../../../utils/api";
 
 //Components
 import Appointments from "../../../Components/Student/Appointments/Appointments";
@@ -6,6 +8,29 @@ import ScheduleDialog from "../../../Components/Student/Schedule/ScheduleDialog"
 
 export default function StudentDashboard() {
   const [open, setOpen] = useState(false);
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    handleAppointments();
+  }, []);
+
+  const handleAppointments = () => {
+    setLoading(false);
+    axiosConfig
+      .get(getAppointments)
+      .then((res) => {
+        if (res.status !== 200) return;
+        let result = res.data.scheduledList;
+        result.reverse();
+        setAppointments(result);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log("ada", err.message);
+      });
+  };
 
   const handleClick = () => {
     setOpen(!open);
@@ -23,9 +48,13 @@ export default function StudentDashboard() {
           </div>
         </div>
 
-        <ScheduleDialog open={open} handleClick={handleClick} />
+        <ScheduleDialog
+          open={open}
+          handleAppointments={handleAppointments}
+          handleClick={handleClick}
+        />
 
-        <Appointments />
+        <Appointments appointments={appointments} loading={loading} />
       </div>
     </>
   );

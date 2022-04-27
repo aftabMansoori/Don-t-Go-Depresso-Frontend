@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { axiosConfig } from "../../../utils/axiosConfig";
+import { getStdtcounsellors, scheduleAppointment } from "../../../utils/api";
+import toast, { Toaster } from "react-hot-toast";
 
 import {
   Box,
@@ -16,14 +19,58 @@ import {
 
 import styles from "./Schedule.module.scss";
 
-export default function ScheduleDialog({ open, handleClick }) {
+export default function ScheduleDialog({
+  open,
+  handleClick,
+  handleAppointments,
+}) {
   const history = useHistory();
 
-  const [counsellor, setCounsellor] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [counsellors, setCounsellors] = useState([]);
+  const [selectedCslr, setSelectedCslr] = useState("");
+
+  useEffect(() => {
+    handleCounsellorList();
+  }, []);
+
+  const handleCounsellorList = () => {
+    setLoading(false);
+
+    axiosConfig
+      .get(getStdtcounsellors)
+      .then((res) => {
+        if (res.status !== 200) return;
+        setCounsellors(res.data.counsellor);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log("ada", err.message);
+        setLoading(false);
+      });
+  };
+
+  const appointmentHandler = () => {
+    setLoading(true);
+    axiosConfig
+      .post(scheduleAppointment, { counsellorID: selectedCslr })
+      .then((res) => {
+        if (res.status !== 201) return;
+        setSelectedCslr("");
+        toast.success("Appointment Requested");
+        setLoading(false);
+        handleClick();
+        handleAppointments();
+      })
+      .catch((err) => {
+        console.log("ada", err.message);
+        toast.error(err.response.data.message);
+        setLoading(false);
+      });
+  };
 
   return (
     <>
-      {/* <div>ScheduleDialog</div> */}
       <Dialog
         open={open}
         onClose={handleClick}
@@ -50,13 +97,18 @@ export default function ScheduleDialog({ open, handleClick }) {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={counsellor}
+                value={selectedCslr}
                 label="select counsellor"
-                // onChange={handleChange}
+                onChange={(e) => setSelectedCslr(e.target.value)}
+                disabled={loading}
               >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {counsellors.length > 0
+                  ? counsellors.map((counsellor) => (
+                      <MenuItem value={counsellor._id}>
+                        {counsellor.counsellorUserName}
+                      </MenuItem>
+                    ))
+                  : "loading..."}
               </Select>
             </FormControl>
           </Box>
@@ -72,11 +124,15 @@ export default function ScheduleDialog({ open, handleClick }) {
             >
               Questionaire
             </button>
-            <button className={styles.reqBtn} onClick={handleClick}>
+            <button
+              className={styles.reqBtn}
+              onClick={() => appointmentHandler()}
+            >
               Request
             </button>
           </div>
         </DialogActions>
+        <Toaster position="top-right" reverseOrder={false} />
       </Dialog>
     </>
   );
