@@ -10,7 +10,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import SearchIcon from "@mui/icons-material/Search";
+
+import DisplaySkeleton from "../../Global/DisplaySkeleton";
 
 import styles from "./Quiz.module.scss";
 
@@ -19,7 +20,6 @@ export default function AllResponses() {
 
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [time, setTime] = useState("");
 
   useEffect(() => {
     handleGetResponse();
@@ -50,7 +50,14 @@ export default function AllResponses() {
   return (
     <>
       {loading ? (
-        "loading..."
+        <div className="mt-5 ">
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+        </div>
       ) : (
         <div className="mt-5">
           {answers.length > 0 ? (
