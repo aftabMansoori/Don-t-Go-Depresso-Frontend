@@ -117,3 +117,32 @@
     color: rgb(108, 99, 255);
   }
 }
+
+.responses {
+  min-height: 100vh;
+  margin: 3rem 0;
+
+  p {
+    margin: 5px 0;
+    font-size: 18px;
+  }
+
+  .red {
+    margin: 1rem 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 0, 0, 0.1);
+  }
+  .yellow {
+    margin: 1rem 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: rgba(216, 250, 8, 0.1);
+  }
+  .green {
+    margin: 1rem 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    // background-color: rgba(0, 255, 0, 0.1);
+  }
+}

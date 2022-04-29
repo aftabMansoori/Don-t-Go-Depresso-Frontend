@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import { getResponse } from "../../../utils/api";
 import { questions } from "../../../Pages/Students/Quiz/questions";
+import { useHistory } from "react-router-dom";
 
 // MUI
 import Table from "@mui/material/Table";
@@ -17,6 +18,7 @@ import styles from "./Quiz.module.scss";
 
 export default function AllResponses() {
   const ql = questions.length;
+  const history = useHistory();
 
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -82,7 +84,15 @@ export default function AllResponses() {
                         <TableCell component="th" scope="row">
                           {i + 1}
                         </TableCell>
-                        <TableCell>{timeHandler(res.time)}</TableCell>
+                        <TableCell
+                          onClick={() =>
+                            history.push(`/student/response/${res._id}`)
+                          }
+                        >
+                          <span className="btn p-0 m-0">
+                            {timeHandler(res.time)}
+                          </span>
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

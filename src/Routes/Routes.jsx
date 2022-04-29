@@ -26,6 +26,7 @@ import StudentDashboard from "../Pages/Students/Dashboard/StudentDashboard";
 import ViewProfile from "../Pages/Students/StudentProfile/ViewProfile";
 import Quiz from "../Pages/Students/Quiz/Quiz";
 import Answers from "../Pages/Students/Quiz/Answers";
+import ViewResponse from "../Components/Student/Quiz/ViewResponse";
 //Counsellor
 import CSSignin from "../Pages/Counsellor/CSSignin/CSSignin";
 import CSDashboard from "../Pages/Counsellor/CSSchedules/CSDashboard";
@@ -73,6 +74,11 @@ export default function Routes() {
             <Quiz />
           </PrivateRoutes>
           <PrivateRoutes exact path="/student/response" component={Answers} />
+          <PrivateRoutes
+            exact
+            path="/student/response/:id"
+            component={ViewResponse}
+          />
 
           {/* College Routes */}
           <Route exact path="/college/signup" component={CollegeSignup} />
