@@ -12,6 +12,7 @@ import {
 } from "./Icons";
 
 import CloseIcon from "@mui/icons-material/Close";
+import { Dialog } from "@mui/material";
 
 class Video extends React.Component {
   constructor() {
@@ -154,74 +155,81 @@ class Video extends React.Component {
   };
   render() {
     return (
-      <div className="video-wrapper">
-        <div className="local-video-wrapper">
+      <Dialog
+        open={true}
+        fullScreen={true}
+        maxWidth={"100vw"}
+        fullWidth={"100vw"}
+      >
+        <div className="video-wrapper">
+          <div className="local-video-wrapper">
+            <video
+              autoPlay
+              id="localVideo"
+              muted
+              ref={(video) => (this.localVideo = video)}
+            />
+          </div>
           <video
             autoPlay
-            id="localVideo"
-            muted
-            ref={(video) => (this.localVideo = video)}
+            className={`${
+              this.state.connecting || this.state.waiting ? "hide" : ""
+            }`}
+            id="remoteVideo"
+            ref={(video) => (this.remoteVideo = video)}
           />
-        </div>
-        <video
-          autoPlay
-          className={`${
-            this.state.connecting || this.state.waiting ? "hide" : ""
-          }`}
-          id="remoteVideo"
-          ref={(video) => (this.remoteVideo = video)}
-        />
 
-        <div className="controls">
-          <button
-            className="control-btn"
-            onClick={() => {
-              this.setVideoLocal();
-            }}
-          >
-            <CloseIcon className="text-success" />
-          </button>
+          <div className="controls">
+            <button
+              className="control-btn"
+              onClick={() => {
+                window.location.href = "/student/dashboard";
+              }}
+            >
+              <CloseIcon className="text-success" />
+            </button>
 
-          <button
-            className="control-btn"
-            onClick={() => {
-              this.getDisplay();
-            }}
-          >
-            <ShareScreenIcon />
-          </button>
+            <button
+              className="control-btn"
+              onClick={() => {
+                this.getDisplay();
+              }}
+            >
+              <ShareScreenIcon />
+            </button>
 
-          <button
-            className="control-btn"
-            onClick={() => {
-              this.setAudioLocal();
-            }}
-          >
-            {this.state.micState ? <MicOnIcon /> : <MicOffIcon />}
-          </button>
+            <button
+              className="control-btn"
+              onClick={() => {
+                this.setAudioLocal();
+              }}
+            >
+              {this.state.micState ? <MicOnIcon /> : <MicOffIcon />}
+            </button>
 
-          <button
-            className="control-btn"
-            onClick={() => {
-              this.setVideoLocal();
-            }}
-          >
-            {this.state.camState ? <CamOnIcon /> : <CamOffIcon />}
-          </button>
-        </div>
-
-        {this.state.connecting && (
-          <div className="status">
-            <p>Establishing connection...</p>
+            <button
+              className="control-btn"
+              onClick={() => {
+                this.setVideoLocal();
+              }}
+            >
+              {this.state.camState ? <CamOnIcon /> : <CamOffIcon />}
+            </button>
           </div>
-        )}
-        {this.state.waiting && (
-          <div className="status">
-            <p>Waiting for someone...</p>
-          </div>
-        )}
-        {this.renderFull()}
-      </div>
+
+          {this.state.connecting && (
+            <div className="status">
+              <p>Establishing connection...</p>
+            </div>
+          )}
+          {this.state.waiting && (
+            <div className="status">
+              <p>Waiting for someone...</p>
+            </div>
+          )}
+          {this.renderFull()}
+        </div>
+      </Dialog>
     );
   }
 }
