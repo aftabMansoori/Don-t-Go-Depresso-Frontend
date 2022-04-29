@@ -151,7 +151,7 @@ export default function StudentSignUp() {
                 <div className="text-center my-5">
                   Already have account? <Link to="/student/signin">Signin</Link>
                 </div>
-                <Toaster position="top-right" reverseOrder={false} />
+                <Toaster position="bottom-right" reverseOrder={false} />
               </div>
             </section>
           </div>

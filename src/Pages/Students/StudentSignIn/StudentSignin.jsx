@@ -40,8 +40,6 @@ export default function StudentSignin() {
         toast.error(err.response.data.message);
         setLoading(false);
       });
-
-    setLoading(false);
   };
 
   const handleBack = () => {
@@ -112,7 +110,7 @@ export default function StudentSignin() {
                 </div>
               </div>
 
-              <Toaster position="top-right" reverseOrder={false} />
+              <Toaster position="bottom-right" reverseOrder={false} />
             </section>
           </div>
           <div className="col-6">

@@ -280,15 +280,15 @@ export default function Navbar({ isAuth }) {
                 >
                   <Typography sx={{ px: 2 }}>
                     <div className="btn">
-                      <Link className="text-dark" to="/student/questionaire">
-                        Questionaire
+                      <Link className="text-dark" to="/student/dashboard">
+                        Dashboard
                       </Link>
                     </div>
                   </Typography>
                   <Typography sx={{ px: 2 }}>
                     <div className="btn">
-                      <Link className="text-dark" to="/student/dashboard">
-                        Dashboard
+                      <Link className="text-dark" to="/student/questionaire">
+                        Questionaire
                       </Link>
                     </div>
                   </Typography>
@@ -320,7 +320,7 @@ export default function Navbar({ isAuth }) {
           )}
         </nav>
       )}
-      <Toaster position="top-right" />
+      <Toaster position="bottom-right" />
     </div>
   );
 }

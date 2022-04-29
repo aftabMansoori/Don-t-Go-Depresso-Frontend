@@ -67,7 +67,7 @@ export default function AddCounsellor({ handleCounsellorList }) {
         >
           Add Counsellor
         </button>
-        <Toaster position="top-right" />
+        <Toaster position="bottom-right" />
       </div>
     </>
   );

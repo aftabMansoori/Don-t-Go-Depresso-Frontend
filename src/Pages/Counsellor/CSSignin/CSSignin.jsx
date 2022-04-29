@@ -89,7 +89,7 @@ export default function CSSignin() {
                 Sign In
               </Button>
             </div>
-            <Toaster position="top-right" reverseOrder={false} />
+            <Toaster position="bottom-right" reverseOrder={false} />
           </section>
         </div>
       </Dialog>

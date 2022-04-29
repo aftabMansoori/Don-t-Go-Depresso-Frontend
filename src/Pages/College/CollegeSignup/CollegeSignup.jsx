@@ -153,7 +153,7 @@ export default function CollegeSignup() {
             <Link to="/college/signin"> Login here</Link>
           </p>
         </div>
-        <Toaster position="top-right" />
+        <Toaster position="bottom-right" />
       </div>
     </Dialog>
   );

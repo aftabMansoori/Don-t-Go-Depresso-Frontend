@@ -38,7 +38,7 @@ export default function StudentDashboard() {
 
   return (
     <>
-      <div className="container">
+      <div className="container mb-5">
         <div className="my-5 d-flex justify-content-between">
           <h3>Appointments</h3>
           <div>

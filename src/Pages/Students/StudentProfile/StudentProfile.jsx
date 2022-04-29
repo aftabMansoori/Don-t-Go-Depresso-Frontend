@@ -59,8 +59,8 @@ export default function StudentProfile() {
     } catch (err) {
       console.log(err);
       setMsg("There was an error while updating your profile");
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleBack = () => {
@@ -108,7 +108,7 @@ export default function StudentProfile() {
             <div>
               <TextField
                 id="outlined-basic"
-                label="Full Name"
+                label="Full Name (Name Surname)"
                 margin="normal"
                 fullWidth
                 variant="outlined"
