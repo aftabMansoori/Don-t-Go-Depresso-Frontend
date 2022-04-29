@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { axiosConfig } from "../../../utils/axiosConfig";
+import { schedule } from "../../../utils/api";
+import toast, { Toaster } from "react-hot-toast";
 
 //MUI
 import Table from "@mui/material/Table";
@@ -8,8 +11,37 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import { TextField } from "@mui/material";
 
-export default function Appointment({ loading, appointments }) {
+export default function Appointment({
+  loading,
+  appointments,
+  appointmentHandler,
+}) {
+  const [date, setDate] = useState(new Date());
+
+  const timeHandler = (date) => {
+    return new Date(date).toLocaleString();
+  };
+
+  const scheduleHandler = (appointment) => {
+    let isoDate = date.toISOString();
+
+    axiosConfig
+      .post(schedule, { scheduleTime: isoDate, appoitmentID: appointment._id })
+      .then((res) => {
+        if (res.status !== 200) return;
+        toast.success("Appointment Scheduled");
+        appointmentHandler();
+      })
+      .catch((err) => {
+        console.log("ada", err.message);
+      });
+  };
+
   return (
     <>
       {loading ? (
@@ -24,7 +56,7 @@ export default function Appointment({ loading, appointments }) {
                     <TableRow>
                       <TableCell className="fw-bold">Sr. No</TableCell>
                       <TableCell className="fw-bold">Student Name</TableCell>
-                      <TableCell className="fw-bold">Date & Time</TableCell>
+                      <TableCell className="fw-bold">Requested On</TableCell>
                       <TableCell className="fw-bold"></TableCell>
                     </TableRow>
                   </TableHead>
@@ -33,18 +65,27 @@ export default function Appointment({ loading, appointments }) {
                       <TableRow key={index}>
                         <TableCell>{index + 1}</TableCell>
                         <TableCell component="th" scope="row">
-                          {appointment.studentID}
+                          {appointment.studentData.studentName}
                         </TableCell>
-                        <TableCell></TableCell>
                         <TableCell>
-                          <button type="button" class="btn btn-primary mx-2">
-                            Schedule
-                          </button>
+                          {timeHandler(appointment.createdAt)}
+                        </TableCell>
+                        <TableCell className="d-flex align-items-center ">
+                          <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DateTimePicker
+                              renderInput={(props) => <TextField {...props} />}
+                              label="Schedule Appointment"
+                              value={date}
+                              onChange={(date) => {
+                                setDate(date);
+                              }}
+                            />
+                          </LocalizationProvider>
                           <button
-                            type="button"
-                            class="btn btn-outline-primary mx-2"
+                            className="btn btn-primary ms-3"
+                            onClick={() => scheduleHandler(appointment)}
                           >
-                            Reschedule
+                            Schedule
                           </button>
                         </TableCell>
                       </TableRow>
@@ -56,10 +97,11 @@ export default function Appointment({ loading, appointments }) {
           ) : (
             <NoData>
               <img src="/Images/noData.svg" className="img-fluid" alt="" />
-              <h3>Nothing appointments yet.</h3>
+              <h3>No appointments yet.</h3>
               <p>When appointment is appointments, it will be visible here.</p>
             </NoData>
           )}
+          <Toaster position="bottom-right" reverseOrder={false} />
         </div>
       )}
     </>

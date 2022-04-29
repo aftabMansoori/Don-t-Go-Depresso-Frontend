@@ -26,3 +26,5 @@ export const scheduleAppointment = "/student/scheduleappointment";
 //Counsellor
 export const counsellorSignin = "/counsellor/signin";
 export const getAppointmentCS = "/counsellor/getallappointment";
+export const endMeeting = "/counsellor/endmeeting";
+export const schedule = "/counsellor/acceptschedule";

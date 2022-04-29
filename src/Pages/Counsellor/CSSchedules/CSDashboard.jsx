@@ -55,17 +55,29 @@ export default function CSSchedules() {
       <div className="container">
         {activeTab === 1 && (
           <>
-            <Scheduled loading={loading} scheduled={scheduled} />
+            <Scheduled
+              loading={loading}
+              scheduled={scheduled}
+              appointmentHandler={appointmentHandler}
+            />
           </>
         )}
         {activeTab === 2 && (
           <>
-            <Appointment loading={loading} appointments={appointments} />
+            <Appointment
+              loading={loading}
+              appointments={appointments}
+              appointmentHandler={appointmentHandler}
+            />
           </>
         )}
         {activeTab === 3 && (
           <>
-            <History loading={loading} history={pastAppointments} />
+            <History
+              loading={loading}
+              history={pastAppointments}
+              appointmentHandler={appointmentHandler}
+            />
           </>
         )}
       </div>
