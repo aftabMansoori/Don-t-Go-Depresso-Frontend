@@ -5,14 +5,13 @@ import { axiosConfig } from "../../../utils/axiosConfig";
 
 import styles from "./Quiz.module.scss";
 
-export default function EndPage({ points, setPoints, answers, setAnswers }) {
+export default function EndPage({ points, answers, setAnswers }) {
   const history = useHistory();
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     handleSave();
-    setPoints(0);
     setAnswers([]);
   }, []);
 
@@ -42,7 +41,7 @@ export default function EndPage({ points, setPoints, answers, setAnswers }) {
         </div>
       ) : (
         <div className={styles.parent + " container"}>
-          <div>
+          <div className="text-white">
             {points >= 0 && points < 100 ? (
               <>
                 <h1>You are doing great</h1>
@@ -59,7 +58,6 @@ export default function EndPage({ points, setPoints, answers, setAnswers }) {
           </div>
           <div>
             <button
-              onCli
               className={styles.startBtn}
               onClick={() => history.push("/student/response")}
             >

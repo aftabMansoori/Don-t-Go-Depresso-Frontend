@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { getResponse } from "../../../utils/api";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import { questions } from "./questions";
+import DisplaySkeleton from "../../../Components/Global/DisplaySkeleton";
 
 // MUI
 import { Dialog } from "@mui/material";
@@ -64,7 +65,7 @@ export default function Answers() {
                 : styles.yellow
             }
           >
-            <p>{res.q}</p>
+            <p className="fw-bold">{res.q}?</p>
             <p>{res.a}</p>
           </div>
         ))}
@@ -94,7 +95,15 @@ export default function Answers() {
         </span>
       </div>
       {loading ? (
-        <div className={styles.parent}>"loading..."</div>
+        <div className="container mt-5">
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+        </div>
       ) : (
         <div className="container">{responseHandler()}</div>
       )}

@@ -234,9 +234,9 @@ export default function Navbar({ isAuth }) {
             id="navbarNavAltMarkup"
           >
             <div className="navbar-nav">
-              <Link className="nav-item nav-link mx-2" to="/">
+              {/* <Link className="nav-item nav-link mx-2" to="/">
                 About Us
-              </Link>
+              </Link> */}
               <Link className="nav-item nav-link mx-2" to="/blogs">
                 Blogs
               </Link>
@@ -246,22 +246,23 @@ export default function Navbar({ isAuth }) {
               <a className="nav-item nav-link mx-2" href="#">
                 Videos
               </a>
-              <a className="nav-item nav-link mx-2" href="#">
+              {/* <a className="nav-item nav-link mx-2" href="#">
                 Contact Us
-              </a>
+              </a> */}
             </div>
           </div>
           {isAuth ? (
             <div className="d-flex align-items-center">
               <div className="d-flex align-items-center">
-                <Avatar
+                {/* <Avatar
                   alt="Cindy Baker"
                   src="https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg"
-                />
+                /> */}
+
                 <p className="ms-3 me-2 mb-0 text-light">
                   {user ? user.studentName : ""}
                 </p>
-                <span className="btn" onClick={handleClick}>
+                <span className="btn p-0 m-0" onClick={handleClick}>
                   <KeyboardArrowDownIcon style={{ color: "#fff" }} />
                 </span>
                 <Popover
