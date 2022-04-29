@@ -10,6 +10,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 export default function History({ loading, history }) {
+  const timeHandler = (date) => {
+    return new Date(date).toLocaleString();
+  };
+
   return (
     <>
       {loading ? (
@@ -24,28 +28,22 @@ export default function History({ loading, history }) {
                     <TableRow>
                       <TableCell className="fw-bold">Sr. No</TableCell>
                       <TableCell className="fw-bold">Student Name</TableCell>
-                      <TableCell className="fw-bold">Date & Time</TableCell>
-                      <TableCell className="fw-bold"></TableCell>
+                      <TableCell className="fw-bold">Counselor Name</TableCell>
+                      <TableCell className="fw-bold">Requested On</TableCell>
+                      <TableCell className="fw-bold">Completed On</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {history.map((history, index) => (
                       <TableRow key={index}>
                         <TableCell>{index + 1}</TableCell>
-                        <TableCell component="th" scope="row">
-                          {history.studentID}
-                        </TableCell>
-                        <TableCell></TableCell>
+                        <TableCell>{history.studentData.studentName}</TableCell>
                         <TableCell>
-                          <button type="button" class="btn btn-primary mx-2">
-                            Schedule
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-outline-primary mx-2"
-                          >
-                            Reschedule
-                          </button>
+                          {history.counsellorData.counsellorUserName}
+                        </TableCell>
+                        <TableCell>{timeHandler(history.createdAt)}</TableCell>
+                        <TableCell>
+                          {timeHandler(history.scheduleTime)}
                         </TableCell>
                       </TableRow>
                     ))}

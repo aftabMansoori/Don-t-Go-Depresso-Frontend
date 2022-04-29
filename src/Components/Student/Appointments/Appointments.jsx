@@ -12,18 +12,22 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
-import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import DoneIcon from "@mui/icons-material/Done";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
+
+import DisplaySkeleton from "../../Global/DisplaySkeleton";
 
 export default function Appointments({ appointments, loading }) {
   const history = useHistory();
 
+  let currentDate = new Date().toISOString();
+
   const user = JSON.parse(localStorage.getItem("user"));
-  const userName = user.studentName.toLowerCase().split(" ").join("");
+  const userID = user._id;
 
   const startCall = () => {
-    history.push(`/call/${userName}`);
+    history.push(`/call/${userID}`);
   };
 
   const timeHandler = (date) => {
@@ -32,55 +36,69 @@ export default function Appointments({ appointments, loading }) {
 
   return (
     <>
-      {appointments.length > 0 ? (
+      {!loading ? (
         <TableContainer>
-          {loading ? (
-            <>"loading"</>
+          {!appointments.length > 0 ? (
+            <NoData>
+              <img src="/Images/noData.svg" className="img-fluid" alt="" />
+              <h3>No Appointment scheduled yet.</h3>
+              <p>
+                Please schedule an appointment to have counselling session with
+                your counsellor.
+              </p>
+            </NoData>
           ) : (
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <TableCell className="fw-bold">Sr. No</TableCell>
-                  <TableCell className="fw-bold">Schedule</TableCell>
+                  <TableCell className="fw-bold">Requested On</TableCell>
+                  <TableCell className="fw-bold">Schedule At</TableCell>
                   <TableCell className="fw-bold">Counsellor</TableCell>
-                  <TableCell className="fw-bold">Status</TableCell>
+                  <TableCell align="center" className="fw-bold">
+                    Status
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {/* <TableRow>
-              <TableCell>0</TableCell>
-              <TableCell component="th" scope="row">
-                22 April, 2022
-              </TableCell>
-              <TableCell>Counsellor Name</TableCell>
-              <TableCell>
-                <button className="btn btn-success" onClick={() => startCall()}>
-                  <VideocamOutlinedIcon /> Start
-                </button>
-              </TableCell>
-            </TableRow> */}
                 {appointments.map((appointment, index) => (
                   <TableRow
                     key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell>{index + 1}</TableCell>
+                    <TableCell>{timeHandler(appointment.createdAt)}</TableCell>
                     <TableCell component="th" scope="row">
                       {appointment.scheduleTime
                         ? timeHandler(appointment.scheduleTime)
                         : "Requested"}
                     </TableCell>
-                    <TableCell>{appointment.counsellorID}</TableCell>
                     <TableCell>
+                      {appointment.counsellorID.counsellorUserName}
+                    </TableCell>
+                    <TableCell align="center">
                       {appointment.scheduleType === "Scheduled" ? (
-                        <div className="text-primary">
+                        <div className="text-success">
                           <CalendarTodayIcon />
-                          <span className="mx-3 text-primary">Scheduled</span>
+                          <span className="mx-3 text-success">Scheduled</span>
+                          <button
+                            type="button"
+                            onClick={() => startCall()}
+                            class="btn btn-success mx-2"
+                            disabled={
+                              currentDate >= appointment.scheduleTime
+                                ? false
+                                : true
+                            }
+                          >
+                            <VideocamOutlinedIcon className="me-2" />
+                            Start
+                          </button>
                         </div>
                       ) : appointment.scheduleType === "History" ? (
-                        <div className="text-success">
+                        <div className="text-primary">
                           <DoneIcon />
-                          <span className="mx-3 text-success">Accepted</span>
+                          <span className="mx-3 text-primary">Accepted</span>
                         </div>
                       ) : (
                         <div className="text-secondary">
@@ -96,14 +114,13 @@ export default function Appointments({ appointments, loading }) {
           )}
         </TableContainer>
       ) : (
-        <NoData>
-          <img src="/Images/noData.svg" className="img-fluid" alt="" />
-          <h3>No Appointment scheduled yet.</h3>
-          <p>
-            Please schedule an appointment to have counselling session with your
-            counsellor.
-          </p>
-        </NoData>
+        <div>
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+          <DisplaySkeleton width={"100%"} />
+        </div>
       )}
     </>
   );
