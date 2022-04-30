@@ -7,7 +7,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import Peer from "simple-peer";
 import io from "socket.io-client";
 
-const socket = io.connect("https://dontgodepresso.netlify.app");
+const socket = io.connect("https://dontgodepresso.herokuapp.com");
 
 export default function StudentSignUp() {
   const [me, setMe] = useState("");
