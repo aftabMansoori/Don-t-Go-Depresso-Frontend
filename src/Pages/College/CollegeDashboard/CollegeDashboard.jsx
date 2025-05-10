@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { Chart } from "react-charts";
+// import { Chart } from "react-charts";
 
 import styles from "./CollegeDashboard.module.scss";
 
@@ -51,11 +51,11 @@ export default function CollegeDashboard() {
             <p>Sessions Taken</p>
           </div>
         </div>
-        <div className="w-100 d-flex align-items-center justify-content-center">
+        {/* <div className="w-100 d-flex align-items-center justify-content-center">
           <div style={{ height: "60vh" }}>
             <Chart data={data} axes={axes} />
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

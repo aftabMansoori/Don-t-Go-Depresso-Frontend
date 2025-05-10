@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 import { axiosConfig } from "../../../utils/axiosConfig";
@@ -36,11 +36,11 @@ export default function StudentProfile() {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm();
 
   const onSubmit = (e) => {
     try {
@@ -195,7 +195,7 @@ export default function StudentProfile() {
           <Button
             variant="contained"
             type="submit"
-            onClick={handleSubmit(onSubmit)}
+            onClick={() => console.log('ada')} // handleSubmit(onSubmit)
             margin="normal"
             disabled={loading}
             size="large"
