@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { saveQuestionaire } from "../../../utils/api";
 import { axiosConfig } from "../../../utils/axiosConfig";
 
 import styles from "./Quiz.module.scss";
 
 export default function EndPage({ points, answers, setAnswers }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
 
@@ -59,7 +59,7 @@ export default function EndPage({ points, answers, setAnswers }) {
           <div>
             <button
               className={styles.startBtn}
-              onClick={() => history.push("/student/response")}
+              onClick={() => navigate("/student/response")}
             >
               Your Answers
             </button>
@@ -69,7 +69,7 @@ export default function EndPage({ points, answers, setAnswers }) {
             >
               Retake
             </button>
-            <button className={styles.backBtn} onClick={() => history.goBack()}>
+            <button className={styles.backBtn} onClick={() => navigate(-1)}>
               Go back
             </button>
           </div>

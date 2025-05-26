@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { getResponse } from "../../../utils/api";
 import { axiosConfig } from "../../../utils/axiosConfig";
@@ -13,7 +13,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import styles from "./Quiz.module.scss";
 
 export default function Answers() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const ql = questions.length;
 
   const [answers, setAnswers] = useState([]);
@@ -88,7 +88,7 @@ export default function Answers() {
         <ArrowBackIcon
           fontSize="large"
           className="btn p-0 m-0"
-          onClick={() => history.push("/student/dashboard")}
+          onClick={() => navigate("/student/dashboard")}
         />
         <span className="mx-3 h3 mb-0">
           {answers.length > 0 ? timeHandler(answers[0].time) : "loading..."}

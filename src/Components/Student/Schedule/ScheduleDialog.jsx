@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import { getStdtcounsellors, scheduleAppointment } from "../../../utils/api";
 import toast, { Toaster } from "react-hot-toast";
@@ -24,7 +24,7 @@ export default function ScheduleDialog({
   handleClick,
   handleAppointments,
 }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const [counsellors, setCounsellors] = useState([]);
@@ -120,7 +120,7 @@ export default function ScheduleDialog({
           <div>
             <button
               className={styles.reqBtn}
-              onClick={() => history.push("/student/questionaire")}
+              onClick={() => navigate("/student/questionaire")}
             >
               Questionaire
             </button>

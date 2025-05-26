@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
   TextField,
@@ -15,7 +15,7 @@ import {
 import styles from "./StudentProfile.module.scss";
 
 export default function StudentProfileP2() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(true);
 
   return (
@@ -103,7 +103,7 @@ export default function StudentProfileP2() {
             <div>
               <button
                 className="btn"
-                onClick={() => history.push("/student/signin")}
+                onClick={() => navigate("/student/signin")}
               >
                 Skip
               </button>

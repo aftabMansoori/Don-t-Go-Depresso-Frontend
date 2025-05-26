@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -19,7 +19,7 @@ import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import DisplaySkeleton from "../../Global/DisplaySkeleton";
 
 export default function Appointments({ appointments, loading }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   let currentDate = new Date().toISOString();
 
@@ -27,7 +27,7 @@ export default function Appointments({ appointments, loading }) {
   const userID = user._id;
 
   const startCall = () => {
-    history.push(`/call/${userID}`);
+    navigate(`/call/${userID}`);
   };
 
   const timeHandler = (date) => {

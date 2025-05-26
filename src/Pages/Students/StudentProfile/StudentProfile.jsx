@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 // import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
@@ -21,7 +21,7 @@ import styles from "./StudentProfile.module.scss";
 
 export default function StudentProfile() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [open, setOpen] = useState(true);
   const [profile, setProfile] = useState({
@@ -50,7 +50,7 @@ export default function StudentProfile() {
         .post("/student/profile", { profile })
         .then((res) => {
           if (res.status !== 200) return;
-          history.push("/student/set-profile/2");
+          navigate("/student/set-profile/2");
           setLoading(false);
         })
         .catch((err) => {
@@ -65,7 +65,7 @@ export default function StudentProfile() {
 
   const handleBack = () => {
     setOpen(false);
-    history.push("/");
+    navigate("/");
   };
 
   return (
@@ -195,7 +195,7 @@ export default function StudentProfile() {
           <Button
             variant="contained"
             type="submit"
-            onClick={() => console.log('ada')} // handleSubmit(onSubmit)
+            onClick={() => onSubmit()} // handleSubmit(onSubmit)
             margin="normal"
             disabled={loading}
             size="large"

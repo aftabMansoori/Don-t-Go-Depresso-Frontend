@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { getResponse } from "../../../utils/api";
 import { axiosConfig } from "../../../utils/axiosConfig";
@@ -13,7 +13,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import styles from "./Quiz.module.scss";
 
 export default function ViewResponse() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const ql = questions.length;
 
@@ -92,7 +92,7 @@ export default function ViewResponse() {
         <ArrowBackIcon
           fontSize="large"
           className="btn p-0 m-0"
-          onClick={() => history.push("/student/view-profile")}
+          onClick={() => navigate("/student/view-profile")}
         />
         <span className="mx-3 h3 mb-0">
           {answers?.answers?.length > 0

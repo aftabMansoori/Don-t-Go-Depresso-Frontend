@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import styles from "./StudentSignin.module.scss";
 
 export default function StudentSignin() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -31,7 +31,7 @@ export default function StudentSignin() {
         localStorage.setItem("token", JSON.stringify(res.data.token));
         localStorage.setItem("isAuth", true);
         toast.success("Sign in Sucessfull");
-        history.push("/student/dashboard");
+        navigate("/student/dashboard");
         window.location.reload(false);
         setLoading(false);
       })
@@ -44,7 +44,7 @@ export default function StudentSignin() {
 
   const handleBack = () => {
     setOpen(false);
-    history.push("/");
+    navigate("/");
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import toast, { Toaster } from "react-hot-toast";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import { counsellorSignin } from "../../../utils/api";
@@ -9,7 +9,7 @@ import { TextField, Button, Dialog } from "@mui/material";
 import styles from "./CSSignin.module.scss";
 
 export default function CSSignin() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +30,7 @@ export default function CSSignin() {
         localStorage.setItem("token", JSON.stringify(res.data.token));
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("isAuth", true);
-        history.push("/counsellor/dashboard");
+        navigate("/counsellor/dashboard");
         toast.success("Login Successfull!");
         setLoading(false);
       })

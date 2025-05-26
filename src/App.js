@@ -1,11 +1,11 @@
-import Routes from "./Routes/Routes.jsx";
+import AppRoutes from "./Routes/Routes.jsx";
 
 import "./App.scss";
 
 function App() {
   return (
     <div>
-      <Routes />
+      <AppRoutes />
     </div>
   );
 }

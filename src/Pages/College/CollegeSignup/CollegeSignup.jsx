@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -9,7 +9,7 @@ import { TextField, Button, Dialog } from "@mui/material";
 import styles from "./CollegeSignup.module.scss";
 
 export default function CollegeSignup() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [college, setCollege] = useState({
     collegeCode: "",
@@ -30,7 +30,7 @@ export default function CollegeSignup() {
       .post("/college/signup", college)
       .then((res) => {
         if (res.status !== 201) return;
-        history.push("/college/signin");
+        navigate("/college/signin");
         toast.success("Sign Up Successfull");
         setLoading(false);
       })

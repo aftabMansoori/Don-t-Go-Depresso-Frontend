@@ -3,8 +3,8 @@ import shortId from "shortid";
 
 import "./video.css";
 
-const goToRoom = (history, roomId) => {
-  history.push(`/call/${roomId}`);
+const goToRoom = (navigate, roomId) => {
+  navigate(`/call/${roomId}`);
 };
 
 export function GoToRoomInput({ history }) {

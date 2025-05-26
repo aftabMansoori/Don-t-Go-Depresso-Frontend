@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import { endMeeting, schedule } from "../../../utils/api";
 import toast, { Toaster } from "react-hot-toast";
@@ -27,7 +27,7 @@ import CallEndIcon from "@mui/icons-material/CallEnd";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 export default function Scheduled({ loading, scheduled, appointmentHandler }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
@@ -45,7 +45,7 @@ export default function Scheduled({ loading, scheduled, appointmentHandler }) {
   };
 
   const startMeeting = (student) => {
-    history.push(`/call/${student._id}`);
+    navigate(`/call/${student._id}`)
   };
 
   const endMeet = () => {

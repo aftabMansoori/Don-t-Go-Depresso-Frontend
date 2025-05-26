@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import styles from "./CollegeSignin.module.scss";
 
 export default function CollegeSignin() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [collegeCode, setCollegeCode] = useState();
   const [password, setPassword] = useState();
@@ -38,7 +38,7 @@ export default function CollegeSignin() {
           localStorage.setItem("token", JSON.stringify(res.data.token));
           localStorage.setItem("user", JSON.stringify(user));
           localStorage.setItem("isAuth", true);
-          history.push("/college/dashboard");
+          navigate("/college/dashboard");
           window.location.reload(false);
           toast.success("Login Successfull!");
           setLoading(false);
@@ -54,7 +54,7 @@ export default function CollegeSignin() {
 
   const handleBack = () => {
     setOpen(false);
-    history.push("/");
+    navigate("/");
   };
 
   return (

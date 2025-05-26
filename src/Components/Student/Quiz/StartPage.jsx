@@ -1,10 +1,10 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./Quiz.module.scss";
 
 export default function StartPage({ incrementPage }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -20,7 +20,7 @@ export default function StartPage({ incrementPage }) {
           <button onClick={incrementPage} className={styles.startBtn}>
             Start
           </button>
-          <button onClick={() => history.goBack()} className={styles.startBtn}>
+          <button onClick={() => navigate(-1)} className={styles.startBtn}>
             Go Back
           </button>
         </div>

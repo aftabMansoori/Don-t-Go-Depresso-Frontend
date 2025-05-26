@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { questions } from "./questions";
 import { calc } from "./logic";
 
@@ -12,7 +12,7 @@ import styles from "./Quiz.module.scss";
 import { Dialog } from "@mui/material";
 
 export default function Quiz() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const pages = questions.length;
 
   const [open, setOpen] = useState(true);

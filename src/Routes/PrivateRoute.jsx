@@ -1,24 +1,21 @@
-import React from "react";
-import { Route, Redirect, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
-const PrivateRoutes = (props) => {
-  const { component: Component, ...rest } = props;
+const PrivateRoutes = ({ element: Component }) => {
   const location = useLocation();
-
   const type = location.pathname.split("/")[1];
-
   const token = JSON.parse(localStorage.getItem("token"));
-  // const user = JSON.parse(localStorage.getItem("user"));
 
-  return token ? (
-    <Route {...rest} render={(props) => <Component {...props} />} />
-  ) : type === "college" ? (
-    <Redirect to="/college/signin" />
-  ) : type === "counsellor" ? (
-    <Redirect to="/counsellor/signin" />
-  ) : (
-    <Redirect to="/" />
-  );
+  if (!token) {
+    if (type === "college") {
+      return <Navigate to="/college/signin" replace state={{ from: location }} />;
+    } else if (type === "counsellor") {
+      return <Navigate to="/counsellor/signin" replace state={{ from: location }} />;
+    } else {
+      return <Navigate to="/" replace state={{ from: location }} />;
+    }
+  }
+
+  return <Component />;
 };
 
 export default PrivateRoutes;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { axiosConfig } from "../../utils/axiosConfig";
 import { studentSignOut } from "../../utils/api";
 import toast, { Toaster } from "react-hot-toast";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { Avatar, Button, Popover, Typography } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -14,7 +14,7 @@ import styles from "./Navbar.module.scss";
 export default function Navbar({ isAuth }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const type = location.pathname.split("/")[1];
@@ -38,7 +38,7 @@ export default function Navbar({ isAuth }) {
         if (res.status !== 200) throw Error;
         localStorage.clear();
         toast.success("Sign Out Successfull");
-        history.push("/");
+        navigate("/");
         window.location.reload(false);
         setLoading(false);
       })
@@ -57,7 +57,7 @@ export default function Navbar({ isAuth }) {
       .then((res) => {
         if (res.status !== 200) return;
         localStorage.clear();
-        history.push("/college/signin");
+        navigate("/college/signin");
         toast.success("Logout Successfull");
         setLoading(false);
       })
@@ -71,7 +71,7 @@ export default function Navbar({ isAuth }) {
   const handleCSSignOut = () => {
     setLoading(true);
     localStorage.clear();
-    history.push("/counsellor/signin");
+    navigate("/counsellor/signin");
     toast.success("Logout Successfull");
     setLoading(false);
   };

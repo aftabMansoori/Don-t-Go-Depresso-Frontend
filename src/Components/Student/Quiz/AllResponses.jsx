@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import { getResponse } from "../../../utils/api";
 import { questions } from "../../../Pages/Students/Quiz/questions";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // MUI
 import Table from "@mui/material/Table";
@@ -18,7 +18,7 @@ import styles from "./Quiz.module.scss";
 
 export default function AllResponses() {
   const ql = questions.length;
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -86,7 +86,7 @@ export default function AllResponses() {
                         </TableCell>
                         <TableCell
                           onClick={() =>
-                            history.push(`/student/response/${res._id}`)
+                            navigate(`/student/response/${res._id}`)
                           }
                         >
                           <span className="btn p-0 m-0">

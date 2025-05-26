@@ -1,11 +1,11 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 // import { Chart } from "react-charts";
 
 import styles from "./CollegeDashboard.module.scss";
 
 export default function CollegeDashboard() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const data = React.useMemo(
     () => [

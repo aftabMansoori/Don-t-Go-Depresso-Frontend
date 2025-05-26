@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getAppointmentCS } from "../../../utils/api";
 import { axiosConfig } from "../../../utils/axiosConfig";
 
@@ -12,7 +12,7 @@ import History from "../../../Components/Counsellor/History/History";
 
 export default function CSSchedules() {
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState(1);
   const [loading, setLoading] = useState(false);

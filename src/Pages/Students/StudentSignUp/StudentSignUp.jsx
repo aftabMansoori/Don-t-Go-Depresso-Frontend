@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { axiosConfig } from "../../../utils/axiosConfig";
 import toast, { Toaster } from "react-hot-toast";
@@ -14,7 +14,7 @@ import styles from "./StudentSignUp.module.scss";
 
 export default function StudentSignUp() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   let [student, setStudent] = useState({
     studentClgEmail: "",
@@ -44,11 +44,11 @@ export default function StudentSignUp() {
             localStorage.setItem("user", JSON.stringify(res.data.user));
             localStorage.setItem("token", JSON.stringify(res.data.token));
             localStorage.setItem("isAuth", true);
-            history.push("/student/set-profile");
+            navigate("/student/set-profile");
             setLoading(false);
           })
           .catch((err) => {
-            history.push("/student/signup");
+            navigate("/student/signup");
           });
       })
       .catch((err) => {
@@ -62,7 +62,7 @@ export default function StudentSignUp() {
 
   const handleBack = () => {
     setOpen(false);
-    history.push("/");
+    navigate("/");
   };
 
   return (

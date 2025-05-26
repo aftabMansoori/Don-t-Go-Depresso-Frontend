@@ -1,7 +1,7 @@
 //base URL
 // export const base_url = "https://dontgodepresso.herokuapp.com";  "http://localhost:5000" ||
-export const base_url = "https://dontgodepresso.herokuapp.com";
-// export const base_url = "http://localhost:5000";
+// export const base_url = "https://dontgodepresso.herokuapp.com";
+export const base_url = "http://localhost:5000";
 
 //College
 export const collegeSignUp = (college) => `/college/signup`;
